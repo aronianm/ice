@@ -1,0 +1,15 @@
+<div>
+	<%= link_to calendar_index_path do %>
+    	<h4 class="<%= 'text-orange ' if action_name =='index' %> cursor-pointer text-xs lg:text-base font-light text-right">Month view</h4>
+    <% end %>
+</div>
+<div>
+    <%= link_to week_calendar_index_path do %>
+    	<h4 class="<%= 'text-orange ' if action_name =='week' %>  text-xs lg:text-base cursor-pointer text-custom-2 font-light text-right ml-6">Week view</h4>
+    <% end %>
+</div>
+<div>
+	<%= link_to day_calendar_index_path do %>
+    	<h4 class=" <%= 'text-orange ' if action_name =='day' %>  text-xs lg:text-base cursor-pointer text-custom-2 font-light text-right ml-6">Day view</h4>
+    <% end %>
+</div>

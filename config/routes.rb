@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   resources :workouts do
     collection do
@@ -9,4 +10,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "workouts#kanboard"
+  resources :calendar, only: [:index] do 
+    collection do
+      get :day
+      get :week
+    end
+  end
 end

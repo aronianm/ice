@@ -53,7 +53,8 @@
                 </a>
             </li>
             <li class="w-1/2 flex justify-end mb-6">
-                <a href="#" class="rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4">
+                <%= link_to calendar_index_path, class: "rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+                
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
                         <rect x="4" y="5" width="16" height="16" rx="2" />
@@ -63,7 +64,7 @@
                         <rect x="8" y="15" width="2" height="2" />
                     </svg>
                     <p class="mt-1 uppercase font-semibold text-xs">calendar</p>
-                </a>
+               <% end %>
             </li>
             <li class="w-1/2 flex justify-start">
                 <a href="#" class="rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4">

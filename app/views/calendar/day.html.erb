@@ -1,0 +1,108 @@
+<div class="flex items-center justify-between mb-10">
+    <h1 class="text-5xl font-bold text-gray-900">Calendar (Day)</h1>
+</div>
+<div class="w-full flex items-cente justify-between">
+    <div>
+        <h4 class="text-xs xl:text-base text-custom-1"><%= @date %></h4>
+    </div>
+    <div class="hidden md:flex justify-center w-1/2">
+        <div class="flex items-center">
+            <svg class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="12" height="12" viewBox="0 0 24 24" stroke-width="1.5" stroke="#353F47" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <polyline points="15 6 9 12 15 18" />
+            </svg>
+            <svg class="cursor-pointer ml-20" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="12" height="12" viewBox="0 0 24 24" stroke-width="1.5" stroke="#353F47" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <polyline points="9 6 15 12 9 18" />
+            </svg>
+        </div>
+    </div>
+    <%= render :partial => "links" %>
+</div>
+<div class="w-full overflow-x-scroll xl:overflow-x-hidden mt-4">
+    <table class="min-w-full bg-white">
+        <thead class="items-center">
+            <tr class="h-20">
+                <th class="border-r border-gray-300 px-10">
+                    <p class="text-custom-3 font-light text-xs">12:00</p>
+                </th>
+                <th class="border-r border-gray-300 px-10">
+                    <p class="text-custom-3 font-light text-xs">13:00</p>
+                </th>
+                <th class="border-r border-gray-300 px-10">
+                    <p class="text-custom-3 font-light text-xs">14:00</p>
+                </th>
+                <th class="border-r border-gray-300 px-10">
+                    <p class="text-custom-3 font-light text-xs">15:00</p>
+                </th>
+                <th class="border-r border-gray-300 px-10">
+                    <p class="text-custom-3 font-light text-xs">16:00</p>
+                </th>
+                <th class="border-r border-gray-300 px-10">
+                    <p class="text-custom-3 font-light text-xs">17:00</p>
+                </th>
+                <th class="border-r border-gray-300 px-10">
+                    <p class="text-custom-3 font-light text-xs">18:00</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="relative">
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r relative md:static border-gray-300 h-20">
+                    <div class="absolute w-48 xl:w-1/5 ml-3 -mt-10 flex items-center bg-custom-gray border-custom-green-light py-1">
+                        <div class="ml-1">
+                            <p class="text-xs">13:00 - 14:40</p>
+                            <p class="text-xs text-custom-blue mt-0.5">Doctor’s</p>
+                        </div>
+                    </div>
+                </td>
+                <td class="border-r border-gray-300 h-20 relative">
+                    <div class="w-4 h-2 flex justify-center bg-custom-orange-2 absolute inset-0 mx-auto -mt-3">
+                        <div class="vl mt-2"></div>
+                    </div>
+                </td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+            </tr>
+            <tr>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+            </tr>
+            <tr>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r relative border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+            </tr>
+            <tr>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+            </tr>
+            <tr>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+                <td class="border-r border-gray-300 h-20"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
