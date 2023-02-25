@@ -6,8 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "/assets/application.js", "data-turbo-track": "reload", defer: true  %>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "/assets/application.js", defer: true  %>
     <link href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet" />
   </head>
 
@@ -18,9 +18,12 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <div class="flex flex-no-wrap">
-    <%= render :partial => "layouts/navigation" unless current_user.nil? %>
-    <%= yield %>
+    <div class="<%= 'flex flex-no-wrap' unless current_user.nil? %> ">
+      <%= render :partial => "layouts/navigation" unless current_user.nil? %>
+      <div class="py-8 px-10 md:px-12 w-full">
+        <%= render :partial => "users/navigation"  unless current_user.nil? %>
+        <%= yield %>
+    </div>
   </div>
   </body>
 </html>

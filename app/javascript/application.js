@@ -1,8 +1,9 @@
 // Entry point for the build script in your package.json
-import "@hotwired/turbo-rails"
+// import "@hotwired/turbo-rails"
 import "./controllers"
 import "./react/src/index.js"
 import './add_jquery'
+import 'flowbite';
 // Inbox script starts
 let elements = document.querySelectorAll("[data-menu]");
 for (let i = 0; i < elements.length; i++) {
