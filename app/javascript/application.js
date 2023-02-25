@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./react/src/index.js"
-
+import './add_jquery'
 // Inbox script starts
 let elements = document.querySelectorAll("[data-menu]");
 for (let i = 0; i < elements.length; i++) {
@@ -23,6 +23,7 @@ for (let i = 0; i < elements.length; i++) {
 }
 //Inbox script ends
 
+$
 // Notebook script starts
 function dropdownFunction(element) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -107,3 +108,10 @@ const selection = (flag) => {
         document.getElementById("check").classList.add("hidden");
     }
 };
+
+
+$(document).ready(function(){
+    $("[data-link]").on('click', function(){
+        window.location.href = this.dataset.link
+    })
+})

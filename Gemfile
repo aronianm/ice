@@ -48,6 +48,8 @@ gem 'file_validators'
 gem 'image_processing'
 gem 'simple_form'
 
+gem 'rolify'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

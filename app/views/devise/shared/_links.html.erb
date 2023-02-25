@@ -1,13 +1,10 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
-<% end %>
-
+<% if false %>
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+  <%= link_to "Sign up", new_registration_path(resource_name), class: "inline-block rounded-r bg-neutral-50 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-neutral-800 transition duration-150 ease-in-out hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none focus:ring-0 active:bg-neutral-200" %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+  <%= link_to "Forgot your password?", new_password_path(resource_name), class: "inline-block rounded-r bg-neutral-50 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-neutral-800 transition duration-150 ease-in-out hover:bg-neutral-100 focus:bg-neutral-100 focus:outline-none focus:ring-0 active:bg-neutral-200" %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
@@ -23,3 +20,59 @@
     <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
   <% end %>
 <% end %>
+<% end %>
+
+<div class="flex flex-col container max-w-md mt-10 mx-auto w-full items-center justify-center bg-white dark:bg-gray-800 rounded-lg shadow">
+  <ul class="flex flex-col divide-y w-full">
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+    <li class="flex flex-row">
+      <div class="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4" data-link='<%= new_registration_path(resource_name) %>'>
+        <div class="flex-1 pl-1">
+          <div class="font-medium dark:text-white">Sign Up</div>
+        </div>
+        <div class="flex flex-row justify-center">
+          
+            <svg width="20" fill="currentColor" height="20" class="hover:text-gray-800 dark:hover:text-white dark:text-gray-200 text-gray-500" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
+            </svg>
+          
+        </div>
+      </div>
+    </li>
+    <% end %>
+    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+    <li class="flex flex-row">
+      <div class="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4" data-link='<%= new_password_path(resource_name) %>'>
+        <div class="flex-1 pl-1">
+          <div class="font-medium dark:text-white">Forgot </div>
+        </div>
+        <div class="flex flex-row justify-center">
+            <svg width="20" fill="currentColor" height="20" class="hover:text-gray-800 dark:hover:text-white dark:text-gray-200 text-gray-500" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
+            </svg>
+          
+        </div>
+      </div>
+    </li>
+
+
+    
+    <% end %>
+    <%- if controller_name == 'registrations' %>
+    <li class="flex flex-row">
+      <div class="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4" data-link='<%= new_user_session_path() %>'>
+        <div class="flex-1 pl-1">
+          <div class="font-medium dark:text-white">Sign In</div>
+        </div>
+        <div class="flex flex-row justify-center">
+            <svg width="20" fill="currentColor" height="20" class="hover:text-gray-800 dark:hover:text-white dark:text-gray-200 text-gray-500" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z"></path>
+            </svg>
+          
+        </div>
+      </div>
+    </li>
+    <% end %>
+
+  </ul>
+</div>
