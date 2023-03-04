@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_25_192333) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_02_203158) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_25_192333) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "exercises", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "target_muscle_id", null: false
+    t.integer "target_sub_muscle_id"
+    t.text "definition"
+    t.integer "created_by", null: false
+    t.integer "updated_by", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "sets"
+    t.integer "reps"
+    t.string "duration"
+    t.index ["name", "target_muscle_id", "created_by"], name: "index_exercises_on_name_and_target_muscle_id_and_created_by", unique: true
+  end
+
+  create_table "muscles", force: :cascade do |t|
+    t.string "name"
+    t.integer "created_by", null: false
+    t.integer "updated_by", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "location"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -80,4 +104,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_25_192333) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "exercises", "muscles", column: "target_muscle_id"
+  add_foreign_key "exercises", "muscles", column: "target_sub_muscle_id"
+  add_foreign_key "exercises", "users", column: "created_by"
+  add_foreign_key "exercises", "users", column: "updated_by"
+  add_foreign_key "muscles", "users", column: "created_by"
+  add_foreign_key "muscles", "users", column: "updated_by"
+  add_foreign_key "users_roles", "roles"
+  add_foreign_key "users_roles", "users"
 end

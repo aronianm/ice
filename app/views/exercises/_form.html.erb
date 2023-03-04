@@ -1,0 +1,39 @@
+<%= simple_form_for @exercise, url: user_exercises_path(current_user), html: {class: "mt-5", autocomplete: "off"} do |f| %>
+  
+  <div class="relative z-0 w-full mb-6 group">
+    <%= f.input :name, label: false, input_html: {class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"}, placeholder: "Name of Exercise" %>
+  </div>
+  <div class="grid md:grid-cols-3 md:gap-6">
+    <div class="relative z-0 w-full mb-6 group">
+        <%= f.input :sets, label: false, input_html: {
+          class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+        }, placeholder: 'Sets' %>
+    </div>
+    <div class="relative z-0 w-full mb-6 group">
+        <%= f.input :reps, label: false, input_html: {
+          class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+        }, placeholder: 'Reps' %>
+    </div>
+    <div class="relative z-0 w-full mb-6 group">
+        <%= f.input :duration, label: false, input_html: {
+          class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" 
+        }, placeholder: 'Duration' %>
+    </div>
+  </div>
+  <div class="grid md:grid-cols-2 md:gap-6">
+    <div class="relative z-0 w-full mb-6 group">
+        <%= f.input :target_muscle_id, collection: Muscle.all_muscles, label: false, input_html: {
+          class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
+            style: "color: #808080c4;"
+        }, prompt: "Target Muscle" %>
+    </div>
+    <div class="relative z-0 w-full mb-6 group">
+        <%= f.input :target_sub_muscle_id, collection: Muscle.all_muscles, label: false, input_html: {
+          class: "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer",
+            style: "color: #808080c4;"
+        }, prompt: "Sub Target Muscle" %>
+    </div>
+  </div>
+  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+
+<% end %>

@@ -4,6 +4,8 @@ import "./controllers"
 import "./react/src/index.js"
 import './add_jquery'
 import 'flowbite';
+
+import "./workouts";
 // Inbox script starts
 let elements = document.querySelectorAll("[data-menu]");
 for (let i = 0; i < elements.length; i++) {
@@ -111,8 +113,29 @@ const selection = (flag) => {
 };
 
 
+
 $(document).ready(function(){
     $("[data-link]").on('click', function(){
         window.location.href = this.dataset.link
     })
+
+    $(this).Workouts()
+    $("a[data-remote]").each(function(){
+        var url =  this.href
+        var target = $(this).data('target')
+        this.href = "#"
+        // history.pushState("turbo", '', url)
+        $(this).on('click', function(){
+            $.ajax({
+                url: url,
+                success: function(data){
+                    if(target){
+                        debugger;
+                    }
+                    
+                }
+            })
+        })
+    })
+
 })

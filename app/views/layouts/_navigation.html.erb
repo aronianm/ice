@@ -31,27 +31,32 @@
                     <p class="mt-1 uppercase font-semibold text-xs">Home</p>
                 <% end %>
             </li>
+            <%  if @roles.include?("admin") ||  @roles.include?("trainor")%>
             <li class="w-1/2 flex justify-end mb-6">
-                <a href="#" class="bg-transparent rounded-md text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4">
+                <%= link_to user_workouts_path(current_user), class: "bg-transparent rounded-md text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+                
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-inbox" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
                         <rect x="4" y="4" width="16" height="16" rx="2" />
                         <path d="M4 13h3l3 3h4l3 -3h3" />
                     </svg>
-                    <p class="mt-1 uppercase font-semibold text-xs">inbox</p>
-                </a>
+                    <p class="mt-1 uppercase font-semibold text-xs">Workouts</p>
+                <% end %>
             </li>
+            <% end %>
+            <%  if @roles.include?("admin") ||  @roles.include?("trainor")%>
             <li class="w-1/2 flex justify-start mb-6">
-                <a href="#" class="rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <%= link_to user_exercises_path(current_user), class: "rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
                         <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
                         <line x1="13" y1="8" x2="15" y2="8" />
                         <line x1="13" y1="12" x2="15" y2="12" />
                     </svg>
-                    <p class="mt-1 uppercase font-semibold text-xs">notebook</p>
-                </a>
+                    <p class="mt-1 uppercase font-semibold text-xs">Exercises</p>
+                <% end %>
             </li>
+            <% end %>
             <li class="w-1/2 flex justify-end mb-6">
                 <%= link_to calendar_index_path, class: "rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4" do %>
                 

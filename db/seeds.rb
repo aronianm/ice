@@ -11,16 +11,20 @@
 if Rails.env == "development"
 	levels = ["Beginner", "Intermediate", "Advanced"]
 	fake_users = [
+		{:name => "Michael", :lname => "Aronian", weight: 175, :height => 69, email: "aronian.m@gmail.com", :level => "Advanced", :goal => "Be better"},
 		{:fname => "Jennifer", :lname => "Pereira", weight: 100, :height => 64, email: 'jen.mp12@gmail.com', level: levels.sample, goal: 'Get better'},
 		{:fname => "Zack", :lname => "Carter", weight: 190, :height => 71, email: 'zackcarter@gmail.com', level: levels.sample, goal: 'Get better'},
 		{:fname => "Jeff", :lname => "Judge", weight: 230, :height => 73, email: 'jen.mp12@gmail.com', level: levels.sample, goal: 'Get better'}
 	]
 
-	fake_users.each do |u|
+	fake_users.each.with_index do |u,i |
 		u[:password] = 'secret'
 		already_existed = User.find_by(email: u[:email])
 		unless already_existed
-			User.create(u)
+			user = User.create(u)
+			if i == 0
+				user.add_role('admin')
+			end
 		end
 	end
 	print("Completed")

@@ -1,0 +1,14 @@
+<% active = "inline-block p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"%>
+<% in_active = "inline-block p-4 text-gray-600 border-b-2 rounded-t-lg active dark:text-gray-500 dark:border-gray-500" %>
+<div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px">
+        <li class="mr-2">
+            <%= link_to user_exercises_path(current_user), class: local_assigns[:active] == :index ? active : in_active   do %>
+                  Exercises
+            <% end %>
+            <%= link_to new_user_exercise_path(current_user), class: local_assigns[:active] == :new ? active : in_active  do %>
+                  New Exercises
+            <% end %>
+        </li>
+    </ul>
+</div>

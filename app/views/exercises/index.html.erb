@@ -1,0 +1,52 @@
+<div class="flex items-center justify-between mb-10">
+    <h1 class="text-5xl font-bold text-gray-900">Exercises</h1>
+</div>
+
+<div class="relative overflow-x-auto">
+    <%= render :partial => 'links', locals: {active: :index} %>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Muscle
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   Sets
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Reps
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   Notes
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @exercises.each do |exercise| %>
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <%=  exercise.name %>
+                    </th>
+                    <td class="px-6 py-4">
+                        <span><strong>Target Muscle: </strong> <%= exercise.target_muscle.try(:name).try(:titleize) %></span><br>
+                        <% unless exercise.sub_target_muscle.nil? %>
+                        <span><strong>Sub Target Muscle</strong> <%= exercise.sub_target_muscle.try(:name).try(:titleize)%></span><br>
+                        <% end %>
+                    </td>
+                    <td class="px-6 py-4">
+                        <%= exercise.sets %>
+                    </td>
+                    <td class="px-6 py-4">
+                        <%= exercise.reps %>
+                    </td>
+                    <td class="px-6 py-4">
+                        <%= exercise.definition %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
