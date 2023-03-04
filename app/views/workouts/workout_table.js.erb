@@ -1,3 +1,8 @@
 var html = `<%=j render :partial => "workout_table" %>`
 
 $("#target").html(html)
+
+var state = "workout_index"
+var url = "/users/<%= current_user.id %>/workouts/";
+
+history.pushState(state, "", url);

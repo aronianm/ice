@@ -17,6 +17,11 @@ class ExercisesController < ApplicationController
 		redirect_to user_exercises_path(current_user)
 	end
 
+	def form_workout
+    	@exercise = Exercise.find(params[:id])
+    	render :partial => "form_exercise", :locals => {:exercise => @exercise}
+  	end
+
 
 	private
 	def exercise_params

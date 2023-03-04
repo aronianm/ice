@@ -13,7 +13,11 @@ Rails.application.routes.draw do
         get :workout_table
       end
     end
-    resources :exercises
+    resources :exercises do
+      member do 
+        get :form_workout
+      end
+    end
   end
 
 

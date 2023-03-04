@@ -1,0 +1,10 @@
+var html = "<%=j render :partial => 'workouts/create/form' %>"
+$("#target").html(html)
+
+var state = ""
+var url = "/users/<%= current_user.id %>/workouts/new";
+
+history.pushState(state, "", url);
+
+
+$("#target").WorkoutCreator()

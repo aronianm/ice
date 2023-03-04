@@ -7,7 +7,7 @@ class CreateWorkoutTable < ActiveRecord::Migration[7.0]
     end
     create_table :workouts do |t|
       t.string :name
-      t.string :day
+      t.date :day
       t.text :notes
       t.integer :created_by
       t.integer :updated_by

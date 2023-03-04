@@ -27,6 +27,8 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem 'jquery-rails'
+
 gem 'rails-ujs', '~> 5.1.0.beta1'
 
 # Use Redis adapter to run Action Cable in production

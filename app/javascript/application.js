@@ -4,7 +4,7 @@ import "./controllers"
 import "./react/src/index.js"
 import './add_jquery'
 import 'flowbite';
-
+import './route_helper';
 import "./workouts";
 // Inbox script starts
 let elements = document.querySelectorAll("[data-menu]");
@@ -120,22 +120,7 @@ $(document).ready(function(){
     })
 
     $(this).Workouts()
-    $("a[data-remote]").each(function(){
-        var url =  this.href
-        var target = $(this).data('target')
-        this.href = "#"
-        // history.pushState("turbo", '', url)
-        $(this).on('click', function(){
-            $.ajax({
-                url: url,
-                success: function(data){
-                    if(target){
-                        debugger;
-                    }
-                    
-                }
-            })
-        })
-    })
+    $(this).routeHelper()
+    $(this).WorkoutCreator()
 
 })
