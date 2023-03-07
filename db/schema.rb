@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_004228) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_004519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_004228) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "exercise_users", force: :cascade do |t|
+    t.integer "program_id"
+    t.integer "user_id"
+    t.integer "exercise_id"
+    t.integer "sets"
+    t.integer "reps"
+    t.integer "duration"
+    t.text "notes"
+  end
+
   create_table "exercise_workouts", force: :cascade do |t|
     t.integer "workout_id"
     t.integer "exercise_id"
@@ -70,6 +80,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_004228) do
     t.string "location"
   end
 
+  create_table "program_exercises", force: :cascade do |t|
+    t.integer "program_id"
+    t.integer "exercise_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.string "name"
+    t.integer "created_by"
+    t.integer "updated_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -78,6 +103,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_004228) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "user_programs", force: :cascade do |t|
+    t.integer "program_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -118,6 +148,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_004228) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "exercise_users", "exercises"
+  add_foreign_key "exercise_users", "programs"
+  add_foreign_key "exercise_users", "users"
   add_foreign_key "exercise_workouts", "exercises"
   add_foreign_key "exercise_workouts", "workouts"
   add_foreign_key "exercises", "muscles", column: "target_muscle_id"
@@ -126,6 +159,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_004228) do
   add_foreign_key "exercises", "users", column: "updated_by"
   add_foreign_key "muscles", "users", column: "created_by"
   add_foreign_key "muscles", "users", column: "updated_by"
+  add_foreign_key "program_exercises", "exercises"
+  add_foreign_key "program_exercises", "programs"
+  add_foreign_key "user_programs", "programs"
+  add_foreign_key "user_programs", "users"
   add_foreign_key "users_roles", "roles"
   add_foreign_key "users_roles", "users"
 end
