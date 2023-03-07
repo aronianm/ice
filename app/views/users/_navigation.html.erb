@@ -14,9 +14,9 @@
               <path d="M10.5 19.8333V21C10.5 22.933 12.067 24.5 14 24.5C15.933 24.5 17.5 22.933 17.5 21V19.8333" stroke="#718096" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
       </div>
-
+      <% if current_user.avatar.attached? %>
       <%= image_tag current_user.avatar.variant(resize_to_fill: [50, 50]), class: 'w-full', :'data-dropdown-toggle' => "dropdown", role: 'button' %>
-
+      <% end %>
       <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
       <li>

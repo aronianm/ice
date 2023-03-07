@@ -86,4 +86,37 @@ $.fn.WorkoutCreator = function(){
 			}
 		})
 	})
+
+	$(this).find("#save").on('click', function(){
+		var url = $(this).data('url')
+		var payload = {'workouts': {'name': "", "notes": "", 'exercises': []}}
+		payload['workouts']['name'] = $("#workout_name").val()
+		payload['workouts']['notes'] = $("#workout_notes").val()
+		
+		$("#exerciseTable > tbody > tr").each(function(){
+
+			exercise  = {
+				'exercise_id': this.dataset.id,
+				'details': {}
+			}
+			details = {}
+			details['sets'] = $(this).find("#sets").val()
+			details['reps'] = $(this).find("#reps").val()
+			details['duration'] = $(this).find("#duration").val()
+			exercise['details'] = details
+			payload['workouts']['exercises'].push(exercise)
+		})
+		$.ajax({
+			url: url,
+			method: 'POST',
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+			},
+			data: payload,
+			dataType: 'json',
+			success: function(){
+				
+			}
+		})
+	})
 }

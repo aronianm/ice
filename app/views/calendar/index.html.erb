@@ -17,9 +17,14 @@
             </svg>
         </div>
     </div>
-	<%= render :partial => "links" %>
+	<%= render :partial => "links", locals: {links: :month} %>
 </div>
 <div class="w-full overflow-x-scroll xl:overflow-x-hidden mt-4">
+    
+    <button class="bg-slate-300 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+      Next
+    </button>
+
     <table class="min-w-full bg-white">
         <thead class="items-center">
             <tr class="h-20">
@@ -47,47 +52,41 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="border-b border-gray-300">
-                <td class="border-r border-gray-300">
-                    <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">27</p>
-                </td>
-                <td class="border-r border-gray-300">
-                    <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">28</p>
-                </td>
-                <td class="border-r border-gray-300">
-                    <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">29</p>
-                </td>
-                <td class="border-r border-gray-300">
-                    <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">30</p>
-                </td>
-                <td class="border-r border-gray-300">
-                    <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">31</p>
-                </td>
-                <td class="border-r border-gray-300 bg-custom-orange">
-                    <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">1</p>
-                </td>
-                <td class="border-r border-gray-300 bg-custom-orange">
-                    <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">2</p>
-                </td>
-            </tr>
+              <tr class="border-b border-gray-300">
+            <% @all_month.each do |week, days| %>
+                
+                <tr class="border-b border-gray-300">
+                  <% days.each do |day| %>
+
+                    <td class="border-r border-gray-300 w-40 <%= 'bg-custom-orange' if day.day == @date_obj.day %>">
+                        <p class="text-xs text-custom-4 pt-2 pl-2 pb-16"><%= day.day %></p>
+                    </td>
+                <% end %>
+               </tr>
+            <% end %>
+      
+            <% if false %>
             <tr class="border-b relative w-full border-gray-300">
                 <td class="border-r border-gray-300">
                     <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">3</p>
                 </td>
                 <td class="border-r relative xl:static border-gray-300">
                     <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">4</p>
+                    <% if false %>
                     <div class="absolute w-64 xl:w-1/5 ml-3 -mt-16 flex items-center bg-custom-gray border-custom-green py-1">
                         <div class="ml-1">
                             <p class="text-xs">4 Sept – 5 Sept</p>
                             <p class="text-xs text-custom-blue mt-0.5">Vacation</p>
                         </div>
                     </div>
+                    <% end %>
                 </td>
                 <td class="border-r border-gray-300">
                     <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">5</p>
                 </td>
                 <td class="border-r relative border-gray-300">
                     <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">6</p>
+                    <% if false %>
                     <div class="flex items-center -mt-16 absolute ml-4">
                         <div class="w-3 h-3 bg-custom-yellow rounded"></div>
                         <div class="ml-2">
@@ -95,6 +94,7 @@
                             <p class="text-xs text-custom-blue mt-1">Doctor’s</p>
                         </div>
                     </div>
+                    <% end %>
                 </td>
                 <td class="border-r border-gray-300">
                     <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">7</p>
@@ -115,12 +115,14 @@
                 </td>
                 <td class="border-r relative xl:static border-gray-300">
                     <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">12</p>
+                    <% if false %>
                     <div class="absolute custom-width ml-3 -mt-16 flex items-center bg-custom-gray border-custom-green py-1">
                         <div class="ml-1">
                             <p class="text-xs">12 Sept – 15 Sept</p>
                             <p class="text-xs text-custom-blue mt-0.5">Tokyo - Business Trip</p>
                         </div>
                     </div>
+                    <% end %>
                 </td>
                 <td class="border-r border-gray-300">
                     <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">13</p>
@@ -181,6 +183,7 @@
                     <p class="text-xs text-custom-4 pt-2 pl-2 pb-16">30</p>
                 </td>
             </tr>
+            <% end %>
         </tbody>
     </table>
 </div>

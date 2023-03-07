@@ -8,7 +8,7 @@
     <div class="px-8">
         <div class="flex items-center justify-between">
             <div class="w-32">
-                <img class="w-full" src="https://cdn.tuk.dev/assets/components/todos/logo.png" alt="quicklist logo" />
+                <h4 class="text-white" style='font-size: 32px;position: absolute;'><strong><u>Frost</u></strong></h4>
             </div>
             <div onclick="openSidebar(true)" class="text-gray-700 ml-8 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -19,7 +19,7 @@
         </div>
         <ul class="my-10 flex flex-wrap">
             <li class="w-1/2 flex justify-start mb-6">
-                <%= link_to root_path, class: "bg-gray-700 rounded-md text-gray-300 flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+                <%= link_to root_path, class: "#{navigation_setter == "kanboard_workouts" ? 'bg-gray-700 text-gray-300' : 'text-gray-600'} rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4" do %>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-kanban" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -33,7 +33,8 @@
             </li>
             <%  if @roles.include?("admin") ||  @roles.include?("trainor")%>
             <li class="w-1/2 flex justify-end mb-6">
-                <%= link_to user_workouts_path(current_user), class: "bg-transparent rounded-md text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+
+                <%= link_to user_workouts_path(current_user), class: "#{navigation_setter == "index_workouts"  ? 'bg-gray-700 text-gray-300' : 'text-gray-600'} rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4" do %>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-inbox" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -46,7 +47,7 @@
             <% end %>
             <%  if @roles.include?("admin") ||  @roles.include?("trainor")%>
             <li class="w-1/2 flex justify-start mb-6">
-                <%= link_to user_exercises_path(current_user), class: "rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+                <%= link_to user_exercises_path(current_user), class: "#{navigation_setter == "index_exercises"  ? 'bg-gray-700 text-gray-300' : 'text-gray-600'} rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4"  do %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
                         <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
@@ -58,7 +59,7 @@
             </li>
             <% end %>
             <li class="w-1/2 flex justify-end mb-6">
-                <%= link_to calendar_index_path, class: "rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+                <%= link_to calendar_index_path, class: "#{navigation_setter == "index_calendar"  ? 'bg-gray-700 text-gray-300' : 'text-gray-600'} rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4"  do %>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />

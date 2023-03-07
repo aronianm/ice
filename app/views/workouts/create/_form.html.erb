@@ -35,15 +35,15 @@
         </div>
     </div>
     <div class="flex-auto w-64">
-    <%= simple_form_for @workout do |f| %>
-        <div class="stepper-targets relative z-0 w-full group" key='0'>
-            <div class="">
-                <%= f.input :name, label: false, input_html: {class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}, placeholder: "Name of Workout" %>
-            </div>
+    
+    <div class="stepper-targets relative z-0 w-full group" key='0'>
+        <div class="">
+            <input class="string optional bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name of Workout" type="text" name="workout[name]" id="workout_name">
         </div>
+    </div>
     <div class="stepper-targets hidden relative z-0 w-full group" key='1'>
         <div>
-            <%= f.input :notes, label: false, input_html: {class: "mt-5 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}, placeholder: "Workout Notes..." %>
+            <textarea class="text optional mt-5 block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Workout Notes..." name="workout[notes]" id="workout_notes"></textarea>
         </div>
     </div>
     <div class="stepper-targets hidden relative z-0 w-full  group" key='2'>
@@ -54,8 +54,8 @@
                 <option value="<%= form_workout_user_exercise_path(current_user, exercise.id) %>"><%= exercise.name %></option>
             <% end %>   
         </select>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table id='exerciseTable' class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <div class="relative overflow-x-auto shadow-md">
+            <table id='exerciseTable' class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-5">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -64,15 +64,21 @@
                         <th scope="col" class="px-6 py-3">
                             Exercise Name
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Sets
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Reps
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Duration
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    
-
                 </tbody>
             </table>
         </div>
+        <button id='save' data-url="<%= user_workouts_path(current_user) %>" class="rounded-full rounded-lg bg-green-500 text-white p-2 mt-5 hover:bg-green-700">Save</button>
     </div>
-   
-    <% end %>
 </div>

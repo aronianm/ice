@@ -1,9 +1,18 @@
-<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" data-id="<%= exercise.id %>">
     <td class="px-6 py-4">
-        1
     </td>
     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        
         <%= exercise.name %>
+    </th>
+    <th>
+        <input type="text" id="sets" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Sets" required>
+        
+    </th>
+    <th>
+        <input type="text" id="reps" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Reps" required>
+        
+    </th>
+    <th>
+         <input type="text" id="duration" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Duration" required>
     </th>
 </tr>
