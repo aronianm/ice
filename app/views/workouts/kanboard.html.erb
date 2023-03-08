@@ -1,62 +1,23 @@
+<div id='program'>
     <div class="flex items-center justify-between mb-10">
-        <h1 class="text-5xl font-bold text-gray-900">Workouts Kanban</h1>
-        <div class="cursor-pointer w-10 h-10 bg-gray-900 text-white rounded-full flex justify-center items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-        </div>
+        <h1 class="text-5xl font-bold text-gray-900"><%= current_user.pluralized_name %> Programs</h1>
     </div>
 
-    <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
-        <div class="rounded">
-            <div class="mb-6 flex items-center justify-between">
-                <h3 class="text-2xl font-semibold text-gray-900">Workouts</h3>
-                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700 icon icon-tabler icon-tabler-dots" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <circle cx="5" cy="12" r="1" />
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="19" cy="12" r="1" />
-                </svg>
+    <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-12 bg-gray-50 dark:bg-gray-700 rounded dark:bg-gray-700 dark:text-gray-400" style="border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;">
+        
+        <div class="flex flex-wrap">
+            <div class="grow items-center mr-4">
+                <h2 class="mb-4  racking-tight uppercase  text-lg float-right">Build a Program</h2>
             </div>
 
-            <div class="w-full h-full py-3 px-2 bg-gray-200 rounded-lg">
-            	<% 3.times do %>
-                    <%= render :partial => "kanboard_item" %>
-                <% end %>
+            <div class="items-center mr-4 grow">
+                <button id='start-build' data-url='<%= create_name_user_programs_path(current_user) %>' type="button" class="float-right text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800 mt-3">Build</button>
             </div>
+            
         </div>
-        <div class="rounded">
-            <div class="mb-6 flex items-center justify-between">
-                <h3 class="text-2xl font-semibold text-gray-900">For review</h3>
-                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700 icon icon-tabler icon-tabler-dots" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <circle cx="5" cy="12" r="1" />
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="19" cy="12" r="1" />
-                </svg>
-            </div>
-            <div class="w-full h-full py-3 px-2 bg-gray-200 rounded-lg">
-            	<% 3.times do %>
-                     <%= render :partial => "kanboard_item" %>
-                <% end %>
-            </div>
-        </div>
-        <div class="rounded">
-            <div class="mb-6 flex items-center justify-between">
-                <h3 class="text-2xl font-semibold text-gray-900">Completed</h3>
-                <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-700 icon icon-tabler icon-tabler-dots" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <circle cx="5" cy="12" r="1" />
-                    <circle cx="12" cy="12" r="1" />
-                    <circle cx="19" cy="12" r="1" />
-                </svg>
-            </div>
-            <div class="w-full h-full py-3 px-2 bg-gray-200 rounded-lg">
-            	<% 3.times do %>
-                     <%= render :partial => "kanboard_item" %>
-                <% end %>
-            </div>
-        </div>
-   
+
+    </div>
+    <div id='form1'>
+    </div>
+</div>

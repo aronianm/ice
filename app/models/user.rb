@@ -14,6 +14,13 @@ class User < ApplicationRecord
               file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
 
 
+  def formatted_name
+    "#{self.fname} #{self.lname}"
+  end
+
+  def pluralized_name
+    " #{self.formatted_name}'s "
+  end
 
   def add_created_role
     self.add_role(:user) if self.roles.blank?

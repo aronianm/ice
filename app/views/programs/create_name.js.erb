@@ -1,0 +1,18 @@
+var html = `<%=j render :partial => 'name_form' %>`
+
+$("#form1").html(html)
+
+console.log("Build 1 in create name")
+
+$("#second-build").on('click', function(){
+	var url = $(this).data('url')
+	$("#name").attr('readonly', true)
+	$.ajax({
+		url: url, 
+		method: 'GET',
+		success:function(){
+			$("#second-build").remove();
+		}
+	})
+	
+})

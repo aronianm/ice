@@ -1,0 +1,14 @@
+var html = "<%=j render :partial => 'add_program_workout' %>"
+
+
+$("#workoutSection").append(html)
+
+$(".add-exercise-to-program:last").on('click', function(){
+	$(".add-exercise-to-program").removeClass('target')
+	var url = $(this).data('url')
+	$(this).addClass('target')
+	$.ajax({
+		url: url,
+		method: 'GET'
+	})
+})

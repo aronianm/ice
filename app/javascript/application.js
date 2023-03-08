@@ -6,6 +6,7 @@ import './add_jquery'
 import 'flowbite';
 import './route_helper';
 import "./workouts";
+import "./program";
 // Inbox script starts
 let elements = document.querySelectorAll("[data-menu]");
 for (let i = 0; i < elements.length; i++) {
@@ -122,5 +123,6 @@ $(document).ready(function(){
     $(this).Workouts()
     $(this).routeHelper()
     $(this).WorkoutCreator()
+    $(this).programCreator()
 
 })

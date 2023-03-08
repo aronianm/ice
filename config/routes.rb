@@ -13,6 +13,17 @@ Rails.application.routes.draw do
         get :workout_table
       end
     end
+    resources :programs do
+      collection do 
+        get :create_name
+        get :add_workouts
+        get :create
+        get :add_program_workout
+        get :add_exercises
+        get 'add_workouts/:location', action: :add_exercise_location, as: :add_exercise_location
+        get :append_exercises
+      end
+    end
     resources :exercises do
       member do 
         get :form_workout

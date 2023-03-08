@@ -1,0 +1,20 @@
+var html = `<%=j render :partial => 'add_workouts' %>`
+
+$("#form2").html('')
+$("#form2").append(html)
+$("#form2").find('div:first').slideDown('slow')
+$("#form2").find('div:first').css('display', 'flex')
+$("#form1 > div").removeClass('rounded')
+
+console.log("Build 2 add workouts")
+
+$("#addWorkout").on('click', function(){
+	var url = $(this).data('url')
+	var workoutName = $("#workoutName").val()
+	$("#workoutName").val('')
+	$.ajax({
+		url: url,
+		method: 'GET',
+		data: {'workout_name': workoutName}
+	})
+})
