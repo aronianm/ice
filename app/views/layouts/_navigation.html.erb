@@ -1,25 +1,10 @@
-<div onclick="openSidebar(false)" class="flex items-center justify-center rounded-r-md bg-gray-800 text-gray-300 ml-0 cursor-pointer absolute inset-0 mt-10 m-auto w-8 h-8">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" />
-        <polyline points="9 6 15 12 9 18" />
-    </svg>
-</div>
-<div id="sidebar" class="overflow-y-auto fixed h-screen z-40 top-0 bg-gray-900 pt-10 w-64 lg:w-72">
-    <div class="px-8">
-        <div class="flex items-center justify-between">
-            <div class="w-32">
-                <h4 class="text-white" style='font-size: 32px;position: absolute;'><strong><u>Frost</u></strong></h4>
-            </div>
-            <div onclick="openSidebar(true)" class="text-gray-700 ml-8 cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <polyline points="15 6 9 12 15 18" />
-                </svg>
-            </div>
-        </div>
-        <ul class="my-10 flex flex-wrap">
-            <li class="w-1/2 flex justify-start mb-6">
-                <%= link_to root_path, class: "#{navigation_setter == "kanboard_workouts" ? 'bg-gray-700 text-gray-300' : 'text-gray-600'} rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+<div class="flex justify-end bg-slate-400 fixed w-full z-40">
+        <div class="flex justify-start grow p-5 items-center">
+        <h4 class="text-xl font-extrabold ">FrostByte</h4>
+    </div>
+        <ul class="flex">
+            <li class="flex justify-start mb-6">
+                <%= link_to root_path, class: "#{navigation_setter == "kanboard_workouts" ? 'bg-slate-500  text-gray-300' : 'text-gray-600'} mt-2 rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4" do %>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-layout-kanban" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -31,10 +16,24 @@
                     <p class="mt-1 uppercase font-semibold text-xs">Home</p>
                 <% end %>
             </li>
-            <%  if @roles.include?("admin") ||  @roles.include?("trainor")%>
-            <li class="w-1/2 flex justify-end mb-6">
+            <% if @roles.include?('personal_trainor') %>
+            <li class="flex justify-start mb-6">
+                <%= link_to user_programs_path(current_user), class: "#{navigation_setter.include?("programs") ? 'bg-slate-500  text-gray-300' : 'text-gray-600'} mt-2 rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                    </svg>
 
-                <%= link_to user_workouts_path(current_user), class: "#{navigation_setter == "index_workouts"  ? 'bg-gray-700 text-gray-300' : 'text-gray-600'} rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4" do %>
+                    <p class="mt-1 uppercase font-semibold text-xs">Programs</p>
+                <% end %>
+            </li>
+            <% end %>
+        </ul>
+        <ul class="flex">
+            <%  if @roles.include?('personal_trainor')  %>
+            <li class="flex justify-end mb-6">
+
+                <%= link_to user_workouts_path(current_user), class: "#{navigation_setter == "index_workouts"  ? 'bg-slate-500 text-gray-300' : 'text-gray-600'} mt-2 rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4" do %>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-inbox" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -45,9 +44,9 @@
                 <% end %>
             </li>
             <% end %>
-            <%  if @roles.include?("admin") ||  @roles.include?("trainor")%>
-            <li class="w-1/2 flex justify-start mb-6">
-                <%= link_to user_exercises_path(current_user), class: "#{navigation_setter == "index_exercises"  ? 'bg-gray-700 text-gray-300' : 'text-gray-600'} rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4"  do %>
+            <%  if @roles.include?('personal_trainor') %>
+            <li class="flex justify-start mb-6">
+                <%= link_to user_exercises_path(current_user), class: "#{navigation_setter == "index_exercises"  ? 'bg-slate-500 text-gray-300' : 'text-gray-600'} mt-2 rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4"  do %>
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
                         <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
@@ -58,8 +57,8 @@
                 <% end %>
             </li>
             <% end %>
-            <li class="w-1/2 flex justify-end mb-6">
-                <%= link_to calendar_index_path, class: "#{navigation_setter == "index_calendar"  ? 'bg-gray-700 text-gray-300' : 'text-gray-600'} rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4"  do %>
+            <li class="flex justify-end mb-6">
+                <%= link_to calendar_index_path, class: "#{navigation_setter == "index_calendar"  ? 'bg-slate-500 text-gray-300' : 'text-gray-600'} mt-2 rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4"  do %>
                 
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" />
@@ -72,91 +71,22 @@
                     <p class="mt-1 uppercase font-semibold text-xs">calendar</p>
                <% end %>
             </li>
-            <li class="w-1/2 flex justify-start">
-                <a href="#" class="rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
-                    </svg>
-                    <p class="mt-1 uppercase font-semibold text-xs">important</p>
-                </a>
-            </li>
-            <li class="w-1/2 flex justify-end">
-                <a href="#" class="rounded-md bg-transparent text-gray-600 flex flex-col justify-center items-center w-20 h-20 p-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-stack" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <polyline points="12 4 4 8 12 12 20 8 12 4" />
-                        <polyline points="4 12 12 16 20 12" />
-                        <polyline points="4 16 12 20 20 16" />
-                    </svg>
-                    <p class="mt-1 uppercase font-semibold text-xs">projects</p>
-                </a>
-            </li>
-        </ul>
-        <div class="flex items-center justify-between text-gray-600">
-            <h4 class="uppercase font-semibold">List</h4>
-            <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer icon icon-tabler icon-tabler-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <line x1="12" y1="5" x2="12" y2="19" />
-                <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-        </div>
-        <ul class="text-gray-600 mt-8">
-            <li class="mb-5">Grocery Items</li>
-            <li class="mb-5">Family</li>
-            <li>Friends</li>
-        </ul>
-        <div class="my-20">
-            <div class="flex items-center justify-between text-gray-600">
-                <h4 class="uppercase font-semibold">Labels</h4>
-                <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer icon icon-tabler icon-tabler-plus" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
+            <li class="flex justify-end mb-6">
+                <div class="mt-2 rounded-md  flex flex-col justify-center items-center w-20 h-20 p-4" data-dropdown-toggle="dropdown" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                 </svg>
+                      <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+            <li>
+              <%= button_to destroy_user_session_path, :class => "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white", method: :delete do %>
+                Sign out
+              <% end %>
+            </li>
+          </ul>
+    </div>
             </div>
-            <ul class="text-gray-600 mt-8">
-                <li class="mb-5 flex items-center">
-                    <span class="mr-2 w-2 h-2 rounded-full bg-indigo-600"></span>
-                    Work Related
-                </li>
-                <li class="mb-5 flex items-center">
-                    <span class="mr-2 w-2 h-2 rounded-full bg-yellow-600"></span>
-                    Family
-                </li>
-                <li class="mb-5 flex items-center">
-                    <span class="mr-2 w-2 h-2 rounded-full bg-green-500"></span>
-                    Friends
-                </li>
-                <li class="mb-5 flex items-center">
-                    <span class="mr-2 w-2 h-2 rounded-full bg-purple-600"></span>
-                    Grocery
-                </li>
-                <li class="mb-5 flex items-center">
-                    <span class="mr-2 w-2 h-2 rounded-full bg-blue-600"></span>
-                    Utilities
-                </li>
-                <li class="mb-5 flex items-center">
-                    <span class="mr-2 w-2 h-2 rounded-full bg-pink-600"></span>
-                    Rental
-                </li>
-                <li class="mb-5 flex items-center">
-                    <span class="mr-2 w-2 h-2 rounded-full bg-red-600"></span>
-                    Maintenance
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="px-8 py-4 border-t border-gray-800 flex items-center text-gray-600 uppercase text-xs fixed w-64 bottom-0 bg-gray-900">
-        <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer icon icon-tabler icon-tabler-trash" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <line x1="4" y1="7" x2="20" y2="7" />
-            <line x1="10" y1="11" x2="10" y2="17" />
-            <line x1="14" y1="11" x2="14" y2="17" />
-            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-        </svg>
-        <p class="cursor-pointer pl-2">trash</p>
-    </div>
+
+            </li>
+        </ul>
 </div>
-<div id="sideBarFiller" class="w-64 lg:w-72 mr-6"></div>

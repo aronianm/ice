@@ -8,26 +8,28 @@ $("#program").append(html)
 $("#program").find("#exerciseModal").slideDown("slow");
 
 $("#addExercises").on('click', function(){
-
+	
 	var url = $(this).data('url')
 	payload = {'exercises': []}
-	$(".exercise-checkbox:checked").each(function(){
-		payload['exercises'].push(this.name)
-	})
-	$.ajax({
-		url: url,
-		data: payload,
-		success: function(data) {
-			debugger;
-			$("#exerciseModal").remove()
-			$(".target").closest("#dropdown").hide()
-			var ul = $(".target").closest(".exercise-card").find(".exercise-list > ul")
-			for(var i = 0; i < data.length; i++){
-				var li_el = `<li class="text-center text-white w-full border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50" style='padding: 0;'>
-			                    ${i + 1} - ${data[i].name}
-			                </li>`
-			    ul.append(li_el)
+	$(".exercise-rows").each(function(){
+		if($(this).data('active')){
+			var exerciseName = $(this).find('.exerciseName')
+			var sets = $(this).find("input[name='sets']").val()
+			var reps = $(this).find("input[name='reps']").val()
+			var duration = $(this).find("input[name='duration']").val()
+			var weight  = $(this).find("input[name='weight']").val()
+			var notes = $(this).find("input[name='notes']").val()
+			exercise = {
+				'name': exerciseName,
+				'sets': sets,
+				'reps': reps,
+				'duration': duration,
+				'weight': weight,
+				'notes': notes
 			}
+			payload['exercises'].push(exercise)
 		}
 	})
+	$("#exerciseModal").remove();
+	debugger;
 })

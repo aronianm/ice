@@ -87,7 +87,7 @@ $.fn.WorkoutCreator = function(){
 		})
 	})
 
-	$(this).find("#save").on('click', function(){
+	$(this).find("#save").on('click', function(event){
 		var url = $(this).data('url')
 		var payload = {'workouts': {'name': "", "notes": "", 'exercises': []}}
 		payload['workouts']['name'] = $("#workout_name").val()
@@ -114,9 +114,6 @@ $.fn.WorkoutCreator = function(){
 			},
 			data: payload,
 			dataType: 'json',
-			success: function(){
-				
-			}
 		})
 	})
 }

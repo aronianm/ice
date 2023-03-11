@@ -1,11 +1,11 @@
 <div class="bg-gray-700 rounded  p-5" style='    border-top-left-radius: 0px; border-top-right-radius: 0px;'>
     <!-- Success messages -->
-    <p id="filled_success_help" class="mt-2 text-xs text-green-600 dark:text-green-400">Give your program a name</p>
+    <p id="filled_success_help" class="mt-2 text-xs text-white" style="font-size: 17pt;font-weight: 800;">Give your program a name</p>
   <div class="flex rounded-md shadow-sm mt-2">
-    <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-md  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Name.." required>
-    <span id='second-build' role='button' data-url='<%= add_workouts_user_programs_path(current_user) %>' class="px-4 inline-flex items-center min-w-fit rounded-r-md border border-l-0 border-gray-200 bg-gray-50 text-sm text-white-500 dark:bg-blue-700 dark:border-gray-700" style='color: white;'>Next</span>
+    <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm text-white rounded-l-md block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 " placeholder="Name.." required style="color: white;" value="<%= local_assigns[:program].try(:name) %>">
+    <span id='second-build' role='button' data-url='<%= add_workouts_user_programs_path(current_user) %>' class="px-4 inline-flex items-center min-w-fit rounded-r-md border border-l-0 border-gray-200 bg-gray-50 text-sm text-white bg-slate-900 border-gray-700">Next</span>
   </div>
 </div>
 
-<div id='form2'>
+<div id='form2' class="ml-5 mr-5">
 </div>

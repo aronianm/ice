@@ -1,69 +1,90 @@
 <div id="exerciseModal" tabindex="-1" aria-hidden="true" class="hidden fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
     <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 bg-gray-700">
       <li class="mr-2">
-          <button id='addExercises' class="inline-block p-4 text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500" data-url='<%= append_exercises_user_programs_path(current_user) %>'>Add Exercises</button>
-      </li>
-      <li class="mr-2 grow">
+        <button id='addExercises' class="inline-block p-4 text-blue-600 bg-gray-100 dark:bg-gray-800 dark:text-blue-500" data-url='<%= append_exercises_user_programs_path(current_user) %>'>Add Exercises</button>
+     </li>
+
+      <li class="mr-2">
           <button aria-current="page" onClick='$("#exerciseModal").remove();' class="inline-block p-4 text-gray-600 bg-gray-100  float-right dark:bg-gray-800 dark:text-gray-500">Close</button>
       </li>
   </ul>
-  <div class="relative w-full h-full  md:h-auto">
+  <div class="relative w-full h-full  md:h-auto" style="height: 100vw;">
     <!-- Modal content -->
     <div class="relative bg-white shadow dark:bg-gray-700">
       <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Grid -->
         <div id='form-3'>
         </div>
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div class="grid sm:grid-cols-4 md:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-6">
           <!-- Card -->
           <% @locations.each do |location, values| %>
-             <button onClick='$(".location-sections:visible").hide(); $("#checkboxExercise-<%= location %>").toggle();' data-url="<%= add_exercise_location_user_programs_path(current_user, location) %>" class="muscle-grouped-exercises group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800" href="#">
+             <button onClick='$(document).find(".Exercise-<%= location %>").toggle();' data-url="<%= add_exercise_location_user_programs_path(current_user, location) %>" class="muscle-grouped-exercises group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800" href="#">
                <div class="p-4 md:p-5" style="width: -webkit-fill-available;">
                  <div class="flex justify-between items-center">
                    <div class="grow">
                      <h3 class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
                        <%= location.titleize() %>
                      </h3>
-                     <p class="text-sm text-gray-500">
-                       <% sectionMuscles = (values - @target_muscle_ids) %>
-                       <% sectionMuscles << (values - @target_sub_muscle_ids) %>
-                       <%= (values.length - (values - @target_muscle_ids).length) %> Target Muscles<br>  <%= (values.length - (values - @target_sub_muscle_ids).length)  %> Sub Muscles
-                     </p>
-                   </div>
-                   <div class="pl-3">
-                     <svg class="w-3.5 h-3.5 text-gray-500" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                       <path d="M5.27921 2L10.9257 7.64645C11.1209 7.84171 11.1209 8.15829 10.9257 8.35355L5.27921 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                     </svg>
-                   </div>
-                 </div>
-               </div>
+                  </div>
+                </div>
+              </div>
              
-             <div id='checkboxExercise-<%=location %>' class='location-sections' style="display: none">
-                <table>
-                    <tr>
-                        <% @exercises.select{|t| sectionMuscles.flatten.include?(t.target_sub_muscle_id) || sectionMuscles.flatten.include?(t.target_muscle_id)}.each.with_index(1) do |exercise, i| %>
-                          
-                          <td>
-                              <div class="flex items-center p-1">
-                              <input id="%=exercise.id%>-checkbox" name='<%= exercise.id %>' type="checkbox" value="" class="w-4 h-4 text-blue-600 exercise-checkbox bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                              <label for="<%=exercise.id%>-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"><%= exercise.name %></label>
-                            </div>
-                          </td>
-                          <% if i % 3 == 0 %>
-                            </tr>
-                            <tr>
-                          <% end %>
-
-                        <% end %>
-                    </tr>
-                </table>
-             </div>
              </button>
           <% end %>
           <!-- End Card -->
        </div>
+        <div class="relative overflow-x-auto">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                          <th scope="col" class="p-4">
+                              <div class="flex items-center">
+                                 <!--  <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"> -->
+                                  <label for="checkbox-all-search" class="sr-only">Add</label>
+                              </div>
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Exercise Name
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Sets
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Reps
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Duration
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Weight
+                          </th>
+                          <th scope="col" class="px-6 py-3">
+                              Notes
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                     <% @exercises.each do |exercise| %>
+                        <tr class="exercise-rows Exercise-<%= exercise.target_muscle.location %> border-b bg-gray-800 border-gray-700" style='display: none;'>
+                            <td class="w-4 p-4">
+                                <div class="flex items-center">
+                                    <input id="checkbox-table-search-1" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onChange="if(this.checked){$(this).closest('tr').data('active', true);}else{$(this).closest('tr').data('active', false)}">
+                                </div>
+                            </td>
+                            <td class='exerciseName' data-name='<%= exercise.name %>'><%= exercise.name %></td>
+                            <td>    <input type="text" class="border focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Sets" name='sets'></td>
+                            <td>    <input type="text" class="border focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Reps" name='reps'></td>
+                            <td>    <input type="text" class="border focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Duration" name='duration'></td>
+                            <td>    <input type="text" class="border focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Duration" name='weight'></td>
+                            <td>    <input type="text" class="border focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" placeholder="Enter Duration" name='notes'></td>
+                        </tr>
+                      <% end %>
+                  </tbody>
+              </table>
+            </div>
         <!-- End Grid -->
-      </div>
+        </div>
     </div>
   </div>
 </div>

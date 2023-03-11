@@ -8,7 +8,6 @@ class Ability
 
     case  @roles
     when :admin
-      binding.pry
     end
 
 

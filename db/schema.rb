@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_023609) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_153052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -81,6 +81,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_023609) do
     t.string "location"
   end
 
+  create_table "personal_trainor_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "personal_trainor"
+    t.index ["user_id", "personal_trainor"], name: "index_personal_trainor_users_on_user_id_and_personal_trainor", unique: true
+  end
+
   create_table "program_exercises", force: :cascade do |t|
     t.integer "program_id"
     t.integer "exercise_id"
@@ -120,13 +126,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_023609) do
     t.integer "weight"
     t.string "level"
     t.string "goal"
+    t.string "city", limit: 88
+    t.string "state", limit: 2
+    t.decimal "rating", precision: 15, scale: 2
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "is_trainor", default: false
+    t.boolean "is_user", default: false
+    t.integer "sign_in_count", default: 0, null: false
+    t.string "confirmation_token"
+    t.string "unlock_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

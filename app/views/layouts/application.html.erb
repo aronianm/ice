@@ -14,19 +14,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ujs/1.2.3/rails.min.js" integrity="sha512-yDJWVxuRSkQa1u9/Zif6Gh93Gk0Urboz98JLEPcERMQ+pTHz/c27d0Xz08G+lgutFyKklB9UILtnhG6bth6B4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
 
-  <body>
+  <body style="background: #374151;">
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-    <div class="<%= 'flex flex-no-wrap' unless current_user.nil? %> ">
       <%= render :partial => "layouts/navigation" unless current_user.nil? %>
-      <div class="py-8 px-10 md:px-12 w-full">
-        <%= render :partial => "users/navigation"  unless current_user.nil? %>
+      <div class="py-8 px-10 md:px-12 w-full" style="    position: relative; top: 100px;">
+
         <%= yield %>
-    </div>
-  </div>
+      </div>
   </body>
 </html>

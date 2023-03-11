@@ -17,7 +17,6 @@ Rails.application.routes.draw do
       collection do 
         get :create_name
         get :add_workouts
-        get :create
         get :add_program_workout
         get :add_exercises
         get 'add_workouts/:location', action: :add_exercise_location, as: :add_exercise_location
@@ -35,7 +34,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "workouts#kanboard"
+  root "home#index"
   resources :calendar, only: [:index] do 
     collection do
       get :day
