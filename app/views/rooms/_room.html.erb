@@ -1,0 +1,5 @@
+<%= link_to room_path(room), :class=> "flex flex-row items-center hover:bg-gray-100 rounded-xl p-2" do %>
+  <% client = room.talking_to(current_user) unless room.nil?  %>
+  <div class="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full"><%= client.first_inital unless room.nil?  %></div>
+  <div class="ml-2 text-sm font-semibold"><%= client.name unless room.nil?  %></div>
+<% end %>

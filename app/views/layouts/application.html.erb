@@ -12,9 +12,21 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/datepicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ujs/1.2.3/rails.min.js" integrity="sha512-yDJWVxuRSkQa1u9/Zif6Gh93Gk0Urboz98JLEPcERMQ+pTHz/c27d0Xz08G+lgutFyKklB9UILtnhG6bth6B4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+      <%= ".msg-#{current_user&.id}" %> > div {
+            flex-direction: row-reverse !important;
+            
+      }
+      <%= ".msg-#{current_user&.id}" %>  {
+        grid-column-end:  13 !important;
+        grid-column-start: 6 !important;
+
+      }
+    </style>
   </head>
 
   <body style="background: #374151;">
+    <% unless current_user.nil?  %>
     <% if notice %>
       <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         <span class="font-medium">Success alert!</span> <%= notice %> <span class='float-right' role='button' onclick="$(this).parent().remove()">x</span>
@@ -23,10 +35,11 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
-      <%= render :partial => "layouts/navigation" unless current_user.nil? %>
-      <div class="py-8 px-10 md:px-12 w-full" style="    position: relative; top: 100px;">
-
+      <%= render :partial => "layouts/navigation" %>
+      <div class="w-full">
+       <% end %>
         <%= yield %>
       </div>
+   
   </body>
 </html>

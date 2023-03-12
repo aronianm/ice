@@ -5,4 +5,9 @@
 import { application } from "./application"
 
 import HelloController from "./hello_controller"
+import MessagerController from './messanger_controller'
+import MessangerBoardController from './messanger_board_controller'
+
 application.register("hello", HelloController)
+application.register("messanger",  MessagerController)
+application.register("messanger_board", MessangerBoardController)

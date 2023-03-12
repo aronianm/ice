@@ -1,16 +1,26 @@
 Rails.application.routes.draw do
-
+  root "home#index"
   devise_for :users
+
   resources :workouts, only: [:index] do
     collection do
       get :kanbaord
     end
   end
 
+  resources :rooms do
+    resources :messages
+  end
+
   resources :users do 
     resources :workouts do
       collection do
         get :workout_table
+      end
+    end
+    resources :rooms, only: [:new] do
+      collection do 
+        get :trainor_connect
       end
     end
     resources :programs do
@@ -29,12 +39,7 @@ Rails.application.routes.draw do
       end
     end
   end
-
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  root "home#index"
+ 
   resources :calendar, only: [:index] do 
     collection do
       get :day

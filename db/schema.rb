@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_11_153052) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_191140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_153052) do
     t.index ["name", "target_muscle_id", "created_by"], name: "index_exercises_on_name_and_target_muscle_id_and_created_by", unique: true
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.text "content"
+  end
+
   create_table "muscles", force: :cascade do |t|
     t.string "name"
     t.integer "created_by", null: false
@@ -110,6 +116,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_153052) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_private", default: true
+    t.integer "user_id"
+    t.integer "trainor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "trainor_id"], name: "index_rooms_on_user_id_and_trainor_id", unique: true
   end
 
   create_table "user_programs", force: :cascade do |t|
@@ -174,10 +190,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_153052) do
   add_foreign_key "exercises", "muscles", column: "target_sub_muscle_id"
   add_foreign_key "exercises", "users", column: "created_by"
   add_foreign_key "exercises", "users", column: "updated_by"
+  add_foreign_key "messages", "rooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "muscles", "users", column: "created_by"
   add_foreign_key "muscles", "users", column: "updated_by"
   add_foreign_key "program_exercises", "exercises"
   add_foreign_key "program_exercises", "programs"
+  add_foreign_key "rooms", "users"
+  add_foreign_key "rooms", "users", column: "trainor_id"
   add_foreign_key "user_programs", "programs"
   add_foreign_key "user_programs", "users"
   add_foreign_key "users_roles", "roles"

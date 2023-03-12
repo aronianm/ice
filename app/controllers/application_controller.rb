@@ -23,5 +23,6 @@ class ApplicationController < ActionController::Base
 
     def update_user_online
       current_user.try :touch
+      @current_user = current_user
     end
 end

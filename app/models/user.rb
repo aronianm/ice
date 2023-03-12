@@ -2,7 +2,9 @@ class User < ApplicationRecord
   rolify :before_create => :before_add_method
 
   before_create :add_created_role
-
+  scope :all_except, ->(user) { where.not(id: user) }
+  has_many :messages
+  after_create_commit { broadcast_append_to "users" }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,6 +26,10 @@ class User < ApplicationRecord
 
   def pluralized_name
     " #{self.formatted_name}'s "
+  end
+
+  def first_inital
+    self.fname[0].titleize
   end
 
   def add_created_role
