@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
     before_action :set_roles
 
     after_action :update_user_online, if: :user_signed_in?
+    before_action :global_variables
 
+    def global_variables
+        @requests = current_user.trainor_requests.where(:accepted => nil).size
+    end
    	protected
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:email, :password, :avatar, :fname, :lname, :weight, :level, :goal)}
@@ -25,4 +29,5 @@ class ApplicationController < ActionController::Base
       current_user.try :touch
       @current_user = current_user
     end
+    
 end

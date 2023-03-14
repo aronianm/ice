@@ -11,11 +11,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   ## Validations
   has_one_attached :avatar
-  has_one :personal_trainor_user
+  has_many :user_trainors
+  has_one :user_trainor, -> {where(accepted: true)}
 
   validates :avatar, file_size: { less_than_or_equal_to: 5.megabytes },
               file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
 
+  has_many :trainor_requests, class_name: 'UserTrainor', foreign_key: :trainor_id, primary_key: :id
 
   scope :personal_trainors, -> {
     where(is_trainor: true)
@@ -46,7 +48,7 @@ class User < ApplicationRecord
   end
 
   def has_trainor?
-    !personal_trainor_user.nil?
+    !user_trainor.nil?
   end
 
   def is_trainor?

@@ -1,0 +1,5 @@
+<% if current_user.id == @trainor.id %>
+	<%= render template: 'users_trainor/trainor' %>
+<% else %>
+	<%= render template: 'users_trainor/user' %>
+<% end %>

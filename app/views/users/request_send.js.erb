@@ -1,0 +1,8 @@
+var flashMessage = `<%=j render :partial => "request_sent_message" %>`
+
+$("#requestTraninorModal").remove();
+$("body").prepend(flashMessage)
+
+<% if @save  %>
+	$("#requestButton").remove();
+<% end %>

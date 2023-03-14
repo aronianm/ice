@@ -2,41 +2,37 @@ Rails.application.routes.draw do
   root "home#index"
   devise_for :users
 
-  resources :workouts, only: [:index] do
-    collection do
-      get :kanbaord
-    end
-  end
-
+  
   resources :rooms do
     resources :messages
   end
-
-  resources :users do 
-    resources :workouts do
-      collection do
-        get :workout_table
+  resources :programs do 
+    resources :workouts, only: [:new, :index, :show]
+  end
+  resources :workouts do
+    resources :exercises do
+      member do
+        get :add
+      end
+      collection do 
+        get :search
       end
     end
+  end
+  resources :users do 
     resources :rooms, only: [:new] do
       collection do 
         get :trainor_connect
       end
     end
-    resources :programs do
-      collection do 
-        get :create_name
-        get :add_workouts
-        get :add_program_workout
-        get :add_exercises
-        get 'add_workouts/:location', action: :add_exercise_location, as: :add_exercise_location
-        get :append_exercises
-      end
+    resources :exercises do 
+      resources :exercise_users
     end
-    resources :exercises do
-      member do 
-        get :form_workout
-      end
+    get :request_trainor, action: :request_modal
+    post :request_trainor, action: :request_send
+    member do 
+      post :accept_user, action: :accept
+      get :accept_user, action: :pre_accept
     end
   end
  
@@ -46,4 +42,6 @@ Rails.application.routes.draw do
       get :week
     end
   end
+
+  resources :users_trainor
 end

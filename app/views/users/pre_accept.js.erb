@@ -1,0 +1,15 @@
+var html = `<%=j render :partial => "acceptance_modal" %>`
+
+$("#acceptanceModal").remove();
+$('body').append(html)
+
+$("#acceptanceModal").slideToggle()
+
+$("#acceptanceModal").find('div:first').each(function(){
+	var leftSide = window.outerWidth/4
+	$(this).css('margin-left', leftSide)
+
+})
+
+
+

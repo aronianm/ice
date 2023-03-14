@@ -1,0 +1,14 @@
+var html = "<%=j render :partial => 'search_exercises' %>"
+$("#staticSearchModal").remove()
+$('#workoutForm').append(html)
+
+$("#staticSearchModal").slideToggle()
+
+$("#staticSearchModal").find('div:first').each(function(){
+	var leftSide = window.outerWidth/4
+	$(this).css('margin-left', leftSide)
+
+})
+
+
+

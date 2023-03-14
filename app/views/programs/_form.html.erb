@@ -1,0 +1,49 @@
+<div data-controller="program">
+     <div class="flex justify-center">
+		<%= simple_form_for(@program, html: { class: "simple_form new_program w-96 grow text-center" }) do |f| %>
+		<label for="name" class="block mb-2 text-sm font-medium text-white">Program Name</label>
+			<div class="mb-6 mt-6">
+			   
+			   <%= f.input :name, label: false, input_html: {class: "text-center grow bg-gray-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", style: 'width: 80%; margin-left: 10%;' } %>
+			</div>
+		   <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+		<% end %>
+	</div>
+<% unless @program.id.nil? %>
+	<ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 p-5">
+	    <li class="mr-2">
+	    	<button data-url="<%= new_program_workout_path(@program) %>" data-action="click->program#addWorkout" class="inline-block p-4 text-gray-100 bg-gray-700 rounded-t-lg active hover:bg-gray-400 hover:text-gray-300 "> 
+	    		Add Workout
+	        </button>
+	    </li>
+		    <% @workouts.each do |workout| %>
+		    <li class="mr-2">
+		    	<button data-url="<%= program_workout_path(@program, workout) %>" data-action="click->program#workoutShow" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300" do %>
+		    		<%= workout.name %>
+		    	</button>
+		    </li>
+		    <% end unless @workouts.nil? %>
+	</ul>
+	<div id='workoutForm'>
+
+	</div>
+	<div class="fixed bottom-0 left-0 z-50 w-full h-16 border-t bg-gray-700 border-gray-600 text-white">
+    <div class="grid h-full max-w-lg grid-cols-2 mx-auto">
+    	<%= link_to new_workout_exercise_path(current_user), class: "inline-flex flex-col items-center justify-center px-5 hover:bg-gray-800 group" do %>
+    
+            <svg class="w-6 h-6 mb-1  text-white  " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            <span class="text-sm text-gray-500 text-white  text-white" >Create Exercises</span>
+        <% end %>
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-800 group">
+            <svg class="w-6 h-6 mb-1 text-gray-500 text-white  " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
+                <path clip-rule="evenodd" fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"></path>
+            </svg>
+            <span class="text-sm text-gray-500  text-white">Users in Program</span>
+        </button>
+    </div>
+</div>
+<% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_11_191140) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_14_113832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,12 +87,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_191140) do
     t.string "location"
   end
 
-  create_table "personal_trainor_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "personal_trainor"
-    t.index ["user_id", "personal_trainor"], name: "index_personal_trainor_users_on_user_id_and_personal_trainor", unique: true
-  end
-
   create_table "program_exercises", force: :cascade do |t|
     t.integer "program_id"
     t.integer "exercise_id"
@@ -133,6 +127,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_191140) do
     t.integer "user_id"
   end
 
+  create_table "user_trainors", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "trainor_id"
+    t.boolean "accepted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -169,6 +171,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_191140) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  create_table "workout_programs", force: :cascade do |t|
+    t.integer "workout_id"
+    t.integer "program_id"
+  end
+
   create_table "workouts", force: :cascade do |t|
     t.string "name"
     t.date "day"
@@ -200,6 +207,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_191140) do
   add_foreign_key "rooms", "users", column: "trainor_id"
   add_foreign_key "user_programs", "programs"
   add_foreign_key "user_programs", "users"
+  add_foreign_key "user_trainors", "users"
+  add_foreign_key "user_trainors", "users", column: "trainor_id"
   add_foreign_key "users_roles", "roles"
   add_foreign_key "users_roles", "users"
 end

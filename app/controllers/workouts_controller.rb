@@ -1,8 +1,5 @@
 class WorkoutsController < ApplicationController
-  def kanboard
-    @workouts_to_do = ['Pushups', 'Jumping Jacks']
-  end
-
+  before_action :set_program, except: [:create, :show, :update]
 
   def index
     @workouts = Workout.where(:created_by => current_user.id)
@@ -21,15 +18,30 @@ class WorkoutsController < ApplicationController
   end
 
   def create
+
     @workout = Workout.new(workout_params)
     @workout.created_by = current_user.id
     @workout.updated_by = current_user.id
     if @workout.save
-      exercise_params.each do |i, exercise|
-        exercise_workout = ExerciseWorkout.new(exercise.permit(:exercise_id))
-        exercise_workout.workout_id = @workout.id
-        exercise_workout.save
+      workout_program = WorkoutProgram.new(program_params)
+      workout_program.workout_id = @workout.id
+      if workout_program.save!
+        @message = "Succesffuly created workout"
+      else
+        @workout.delete
       end
+    end
+    render layout: false
+  end
+
+  def show 
+    @workout_program = WorkoutProgram.find_by(:program_id => params[:program_id], :workout_id => params[:id])
+    @workout = @workout_program.workout
+    @program = @workout_program.program
+    @workout_exercises =  ExerciseWorkout.where(:workout_id => @workout.id)
+    @exercises = @workout.exercises
+    respond_to do |format|
+      format.js{}
     end
   end
 
@@ -42,13 +54,26 @@ class WorkoutsController < ApplicationController
     end
   end
 
+  def update
+    @workout = Workout.find_by(:id => params[:id])
+    @workout.update!(workout_params)
+  end
+
   private
   def workout_params
-    workout_params = params['workouts']
-    workout_params.permit(:name, :notes)
+    workout_params = params['workout']
+    workout_params.permit(:name, :notes, :day)
   end
 
   def exercise_params
     params['workouts']['exercises']
+  end
+
+  def set_program
+    @program = Program.find(params[:program_id])
+  end
+
+  def program_params
+    params[:program].permit(:program_id)
   end
 end

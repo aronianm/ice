@@ -3,8 +3,8 @@
 
 
 <%= form_with(model: [@room ,@message], remote: true, 
-     data: { controller: "messanger", action: "turbo:submit-end->messanger#reset" }) do |f| %>
-<div class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4">
+     data: { controller: "messanger", action: "turbo:submit-end->messanger#reset" }, html: {class: 'mb-10'}) do |f| %>
+<div class="flex flex-row items-center h-16 rounded-xl bg-gray-700 w-full px-4">
   <div>
     <button class="flex items-center justify-center text-gray-400 hover:text-gray-600">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

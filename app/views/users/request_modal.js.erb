@@ -1,0 +1,14 @@
+var html = `<%=j render :partial => "request_trainor_modal" %>`
+
+
+$("body").append(html)
+$("#requestTraninorModal").slideToggle()
+
+$("#requestTraninorModal").find('div:first').each(function(){
+	var leftSide = window.outerWidth/3
+	$(this).css('margin-left', leftSide)
+
+})
+
+
+

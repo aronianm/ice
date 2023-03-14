@@ -1,0 +1,9 @@
+<% if @save == true %>
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                <span class="font-medium">Success!</span> You just sent a request to <%= @user_trainor.trainor.name %><span class='float-right' role='button' onclick="$(this).parent().remove()">x</span>
+        </div>
+<% else %>
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <span class="font-medium">Alert!</span>  <%= @message %> <span class='float-right' role='button' onclick="$(this).parent().remove()">x</span>
+        </div>
+<% end %>

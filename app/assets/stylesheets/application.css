@@ -120,3 +120,17 @@ hr.new1 {
         width: 50%;
     }
 }
+
+
+.frost-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.frost-flex .frost-flex-9 > div {
+  flex: 1 0 12.5%; /* explanation below */
+  margin: 5px;
+  height: 100px;
+  background-color: blue;
+  width: auto;
+}

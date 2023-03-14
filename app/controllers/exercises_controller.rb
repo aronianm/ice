@@ -22,6 +22,20 @@ class ExercisesController < ApplicationController
     	render :partial => "form_exercise", :locals => {:exercise => @exercise}
   	end
 
+   	def search
+    	@workout = Workout.find(params[:workout_id])
+    	@exercise_workout = ExerciseWorkout.new(:workout_id => @workout.id)
+    	@exercises = Exercise.where(:created_by => current_user.id)
+    	@workout_exercises =  ExerciseWorkout.create(:workout_id => params[:workout_id] )
+
+  	end
+
+  	def add
+  		@workout_exercise =  ExerciseWorkout.create(:exercise_id => params[:id], :workout_id => params[:workout_id] )
+  		render :partial => 'list_item', locals: {:workout_exercise => @workout_exercise} 
+  	end
+
+
 
 	private
 	def exercise_params

@@ -1,0 +1,40 @@
+<div class="<%= 'hidden' unless @workout.id.blank? %>" data-controller='workout'>
+<%= form_for @workout, html: {class: "p-5", id: 'workoutForm'}, remote: true do |f| %>
+  <input type="hidden" name="program_id" value='<%= @program.id %>'>
+  <div class="grid md:grid-cols-2 md:gap-6">
+        <button type="button" data-action="click -> workout#submitWorkout" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 absolute right-5 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 z-10">Submit</button>
+    <div class="relative z-0 w-full mb-6 group">
+        <input type="text" name="name" id="name" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value='<%= @workout.name %>'required />
+        <label for="workout[name]" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Workout Name</label>
+    </div>
+    <div class="relative z-0 w-full mb-6 group">
+      <div class="relative max-w-sm">
+   
+          <input datepicker  name="day" type="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" value="<%= @workout.day.strftime("%Y-%m-%d") unless  @workout.day.nil? %>">
+        
+        </div>
+    </div>
+  </div>
+  <div class="relative z-0 w-full mb-6 group">
+      <textarea  name="notes" id="notes" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required><%= @workout.notes%></textarea>
+      <label for="notes" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Notes</label>
+  </div>
+<% end %>
+</div>
+
+<% unless @workout.id.blank? %>
+<div  data-controller='exercise' class="container mt-4 mx-auto">
+    <div id='exerciseTarget'  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <% @workout_exercises.each do |exercise| %>
+          <%= render :partial => 'exercises/list_item', locals: {:workout_exercise => exercise}  %>
+      <% end %>
+        <div data-action="click->exercise#addNew" data-url="<%= search_workout_exercises_path(@workout) %>" class="card m-2 cursor-pointer border border-gray-400 rounded-lg hover:shadow-md hover:border-opacity-0 transform hover:-translate-y-1 transition-all duration-200">
+            <div class="m-3">
+              <h2 class="text-lg mb-2 text-white">Add Workout
+             <span class="text-sm text-teal-800 font-mono bg-teal-100 inline rounded-full px-2 align-top float-right animate-pulse">+</span></h2>
+            <p class="font-light font-mono text-sm text-gray-700 hover:text-gray-900 transition-all duration-200 text-white">Click here to add a new workout</p>
+            </div>
+        </div>
+  </div>
+</div>
+<% end %>
