@@ -11,6 +11,8 @@ import UserController from './user_controller'
 import ProgramController from './program_controller'
 import ExerciseController from './exercise_controller'
 import WorkoutController from './workout_controller'
+import DataTableController from './datatable_controller'
+
 application.register("hello", HelloController)
 application.register("messanger",  MessagerController)
 application.register("messanger_board", MessangerBoardController)
@@ -18,3 +20,4 @@ application.register("user", UserController)
 application.register("program", ProgramController)
 application.register("exercise", ExerciseController)
 application.register("workout", WorkoutController)
+application.register('datatable', DataTableController)

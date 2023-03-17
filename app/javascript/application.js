@@ -7,6 +7,9 @@ import './route_helper';
 import "./workouts";
 import "./program";
 // Inbox script starts
+// Add DataTables jQuery plugin
+
+
 
 
 document.addEventListener("turbo:before-stream-render", function (event) {

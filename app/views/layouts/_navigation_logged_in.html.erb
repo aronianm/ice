@@ -3,11 +3,7 @@
         <p class="mt-1 uppercase font-semibold text-xs">Messages</p>
   <% end %>
 </li>
-<li>
-  <%= link_to programs_path, class: "block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
-        <p class="mt-1 uppercase font-semibold text-xs">Programs</p>
-  <% end %>
-</li>
+<% if current_user.is_trainor %>
 <li>
   <%= link_to users_trainor_index_path, class:"inline-flex items-center py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
     <p class="mt-1 uppercase font-semibold text-xs">Request</p>
@@ -27,6 +23,14 @@
     </div>
   <% end %>
 </li>
+<% else %>
+  <li>
+    <%= link_to programs_path, class: "block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
+          <p class="mt-1 uppercase font-semibold text-xs">Current Program</p>
+    <% end %>
+  </li>
+
+<% end %>
 <li>
     <button id="dropdownNavbarLink" data-controller="user" class="block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" >
       <p class="mt-1 uppercase font-semibold text-xs" data-action="click->user#dropdown"> User Options </p></button>

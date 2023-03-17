@@ -1,56 +1,62 @@
-<div data-controller='user' class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left text-gray-500 text-gray-400">
-        <thead class="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Rating
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Status
-                </th>
-                 <th scope="col" class="px-6 py-3">
-                    Location
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Message
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @trainors.each do |trainor| %>
+<div data-controller='user' class="relative overflow-x-auto shadow-md sm:rounded-lg container">
+    <div class="container mx-auto ">
+        <div class="py-8">
+            <div class=" sm:px-8 py-4 overflow-x-auto">
+                <table data-controller='datatable' class="w-full text-sm text-left text-gray-500 text-gray-400">
+                    <thead class="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Rating
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Status
+                            </th>
+                             <th scope="col" class="px-6 py-3">
+                                Location
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Message
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @trainors.sort_by{|t| t.rating.nil? ? 0 : t.rating}.reverse.each do |trainor| %>
 
-            <tr class="border-b bg-gray-800  border-gray-700 hover:bg-gray-50 hover:bg-gray-600">
-                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap text-white">
-                    <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/<%= ['men', 'women'].sample %>/<%= (0..98).to_a.sample %>.jpg" alt="Jese image">
-                    <div class="pl-3">
-                        <div class="text-base text-white font-semibold"><%= trainor.name %></div>
-                    </div>  
-                </th>
-                <td class="px-6 py-4">
-                    <div style="display: inline-flex;">
-                        <%= trainor.formatted_ratings %>
-                    </div>
-                </td>
-                <td class="px-6 py-4">
-                    <%= trainor.formatted_location %>
-                </td>
-                <td class="px-6 py-4">
-                    <div class="flex items-center">
-                        <% if trainor.online?  %>
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
-                        <% else %>
-                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Offline
+                        <tr class="border-b bg-gray-800  border-gray-700 hover:bg-gray-50 hover:bg-gray-600">
+                            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap text-white">
+                                <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/<%= ['men', 'women'].sample %>/<%= (0..98).to_a.sample %>.jpg" alt="Jese image">
+                                <div class="pl-3">
+                                    <div class="text-base text-white font-semibold"><%= trainor.name %></div>
+                                </div>  
+                            </th>
+                            <td data-sort='<%= trainor.rating %>' class="px-6 py-4">
+                                <div style="display: inline-flex;">
+                                    <%= trainor.formatted_ratings %>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <%= trainor.formatted_location %>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <% if trainor.online?  %>
+                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
+                                    <% else %>
+                                    <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Offline
+                                    <% end %>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4" role='button' data-action='click->user#renderRequest' data-url="<%= profile_user_path(trainor) %>">
+                                <%= render :template => "icons/profile" %>
+                            </td>
+                        </tr>
                         <% end %>
-                    </div>
-                </td>
-                <td class="px-6 py-4" role='button' data-action='click->user#renderRequest' data-url="<%= profile_user_path(trainor) %>">
-                    <%= render :template => "icons/profile" %>
-                </td>
-            </tr>
-            <% end %>
-        </tbody>
-    </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
