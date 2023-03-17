@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_14_113832) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_17_020827) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -102,6 +102,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_113832) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "request_chats", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "trainor_id"
+    t.boolean "accepted"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -140,19 +148,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_113832) do
     t.string "encrypted_password", default: "", null: false
     t.string "fname"
     t.string "lname"
+    t.string "gender"
     t.integer "height"
     t.integer "weight"
     t.string "level"
     t.string "goal"
     t.string "city", limit: 88
     t.string "state", limit: 2
+    t.integer "zipcode"
     t.decimal "rating", precision: 15, scale: 2
+    t.text "biline"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean "is_trainor", default: false
     t.boolean "is_user", default: false
     t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.string "confirmation_token"
     t.string "unlock_token"
     t.datetime "created_at", null: false

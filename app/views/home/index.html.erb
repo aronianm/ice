@@ -1,3 +1,6 @@
 <% if @no_trainor %>
     <%= render :partial => "no_trainer" %>
 <% end %>
+<% if current_user.nil? %>
+    <%= render :partial => "no_user" %>
+<% end %>

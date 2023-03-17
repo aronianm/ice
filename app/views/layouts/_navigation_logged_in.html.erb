@@ -1,0 +1,51 @@
+<li>
+  <%= link_to rooms_path, class: "block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
+        <p class="mt-1 uppercase font-semibold text-xs">Messages</p>
+  <% end %>
+</li>
+<li>
+  <%= link_to programs_path, class: "block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
+        <p class="mt-1 uppercase font-semibold text-xs">Programs</p>
+  <% end %>
+</li>
+<li>
+  <%= link_to users_trainor_index_path, class:"inline-flex items-center py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
+    <p class="mt-1 uppercase font-semibold text-xs">Request</p>
+    <span data-tooltip-target="tooltip-request-trainor"  class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
+      <%= @requests %>
+    </span>
+    <span data-tooltip-target="tooltip-request-message" class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-yellow-800 bg-yellow-200 rounded-full">
+      <%= @message_requests  %>
+    </span>
+      <div id="tooltip-request-message" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        User request chat
+        <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+    <div id="tooltip-request-trainor" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+        User request you as a trainor
+        <div class="tooltip-arrow" data-popper-arrow></div>
+    </div>
+  <% end %>
+</li>
+<li>
+    <button id="dropdownNavbarLink" data-controller="user" class="block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" >
+      <p class="mt-1 uppercase font-semibold text-xs" data-action="click->user#dropdown"> User Options </p></button>
+    <!-- Dropdown menu -->
+    <div id="dropdownNavbar" class="z-10 hidden absolute font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+    <% unless current_user.nil? %>
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+          <% if current_user.is_trainor %>
+          <li>
+            <%= link_to user_exercises_path(current_user), class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>Exercises
+            <% end %>
+          </li>
+          <% end %>
+      </ul>
+        <div class="py-1">
+          <%= button_to destroy_user_session_path, :class => "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white", method: :delete do %>
+            Sign out
+        </div>
+        <% end %>
+    <% end %>
+    </div>
+</li>

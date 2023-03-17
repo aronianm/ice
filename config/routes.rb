@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   root "home#index"
+  resources :home, only: [:index] do
+    collection do 
+      get :privacy_policy
+    end
+  end
   devise_for :users
 
   
@@ -28,12 +33,14 @@ Rails.application.routes.draw do
     resources :exercises do 
       resources :exercise_users
     end
-    get :request_trainor, action: :request_modal
-    post :request_trainor, action: :request_send
     member do 
       post :accept_user, action: :accept
       get :accept_user, action: :pre_accept
+      get :profile
     end
+    get :request_trainor, action: :request_modal
+    post :request_trainor, action: :request_send
+    post :request_trainor_chat, action: :request_chat
   end
  
   resources :calendar, only: [:index] do 

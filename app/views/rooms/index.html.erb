@@ -36,8 +36,10 @@
               class="h-full w-full"
             />
           </div>
+          <% unless @talking_to.nil?%>
           <div class="text-sm font-semibold mt-2"><%= @talking_to.name  unless @talking_to.nil? %></div>
           <div class="text-xs text-gray-500"><%= @talking_to.is_trainor ? "Personal Trainor" : "" unless @talking_to.nil? %></div>
+          <% end %>
         </div>
         <div class="flex flex-col mt-8">
           <div class="flex flex-row items-center justify-between text-xs">
@@ -54,21 +56,23 @@
         </div>
       </div>
       <div class="flex flex-col flex-auto  ">
-      <% if @user_connection.nil? %>
-      <ul id='messageUtils' class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 border-gray-700 text-gray-400">
-        <li class="mr-2">
-          <%= button_to room_path(@room), method: :delete, class: "inline-block text-white p-4 rounded-t-lg hover:text-gray-600" do %>
-            Remove Chat
-          <% end unless @room.nil?%>
-        </li>
-        <%  unless @room.nil?%> 
-        <li id='requestTrainorButton' class="mr-2" data-controller='user'>
-          <button data-action="click -> user#request" data-url="<%= user_request_trainor_path(@talking_to)%>" class = "inline-block text-white p-4 rounded-t-lg hover:text-gray-600">
-            Request <%= @talking_to.fname %>'s Program
-          </button>
-        </li>
-        <% end %>
-      </ul>
+      
+        <% if @user_connection.nil? && !@talking_to.nil?%>
+          <ul id='messageUtils' class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 border-gray-700 text-gray-400">
+          <%  unless @room.nil?%> 
+              <li class="mr-2">
+                <%= button_to room_path(@room), method: :delete, class: "inline-block text-white p-4 rounded-t-lg hover:text-gray-600" do %>
+                  Remove Chat
+                <% end %>
+              </li>
+              <li id='requestTrainorButton' class="mr-2" data-controller='user'>
+              <button data-action="click -> user#request" data-url="<%= user_request_trainor_path(@talking_to)%>" class = "inline-block text-white p-4 rounded-t-lg hover:text-gray-600">
+                Request <%= @talking_to.fname %>'s Program
+              </button>
+            </li>
+         
+         <% end %>
+        </ul>
       <% elsif @user_connection.try(:pending?) %>
           <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert" style="border: solid 2px;">
               <span class="font-medium">Just waiting for trainor to accept</span> 

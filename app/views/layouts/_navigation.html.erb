@@ -1,9 +1,9 @@
-<nav class="px-2  border-gray-200 bg-gray-900 border-gray-700">
+<nav class="fixed top-0 left-0  w-full px-2  z-20 border-gray-200 bg-gray-900 border-gray-700">
   <div class="container flex flex-wrap items-center justify-between mx-auto">
     <a href="#" class="flex items-center">
         <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-10" alt="Flowbite Logo" />
         
-        <span class="self-center text-sm font-semibold whitespace-nowrap text-white"> Welcome to <span class="self-center text-xl font-semibold whitespace-nowrap text-white">FrostByte</span> <br><%= current_user.name %></span>
+        <span class="self-center text-sm font-semibold whitespace-nowrap text-white"> Welcome to <span class="self-center text-xl font-semibold whitespace-nowrap text-white">FrostByte</span> <br><%= current_user.try(:name) %></span>
     </a>
     <button data-collapse-toggle="navbar-dropdown" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
       <span class="sr-only">Open main menu</span>
@@ -17,50 +17,16 @@
             <% end %>
           
         </li>
-        <li>
-          <%= link_to rooms_path, class: "block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
-                <p class="mt-1 uppercase font-semibold text-xs">Messages</p>
-          <% end %>
-        </li>
-        <% if current_user.is_trainor %>
-        <li>
-          <%= link_to programs_path, class: "block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
-                <p class="mt-1 uppercase font-semibold text-xs">Programs</p>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to users_trainor_index_path, class:"inline-flex items-center py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
-            <p class="mt-1 uppercase font-semibold text-xs">Request</p>
-            <span class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
-              <%= @requests %>
-            </span>
-          <% end %>
+        <% unless current_user.nil? %>
+            <%= render :partial => "layouts/navigation_logged_in"%>
+        <% else %>
+            <li>
+               <%= link_to new_user_session_path, class: "block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" do %>
+                  <p class="mt-1 uppercase font-semibold text-xs">Login</p>
+              <% end %>
           
-        </li>
-         <% end %>
-        <li>
-            <button id="dropdownNavbarLink" data-controller="user" class="block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent text-white md:p-0  bg-gray-600 md:dark:bg-transparent" >
-              <p class="mt-1 uppercase font-semibold text-xs" data-action="click->user#dropdown"> User Options </p></button>
-            <!-- Dropdown menu -->
-            <div id="dropdownNavbar" class="z-10 hidden absolute font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
-                  <% if current_user.is_trainor %>
-                  <li>
-                    <%= link_to user_exercises_path(current_user), class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" do %>Exercises
-                    <% end %>
-                  </li>
-                  <% end %>
-                </ul>
-
-                <div class="py-1">
-                  <%= button_to destroy_user_session_path, :class => "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white", method: :delete do %>
--                Sign out
--              <% end %>
-                </div>
-
-                
-            </div>
-        </li>
+             </li>
+        <% end %>
       </ul>
     </div>
   </div>

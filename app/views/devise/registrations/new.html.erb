@@ -1,9 +1,9 @@
-<div class="flex h-screen bg-gray-100">
+<div class="flex h-screen bg-gray-100 bg-[url(<%= image_path('homepage.jpg') %>)] bg-cover">
   <%= render "devise/shared/error_messages", resource: resource %>
    <div class="m-auto">
-      <div>
+      <div style="margin-top: -5px;">
         <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-         <div class="mt-5 bg-white rounded-lg shadow">
+         <div class="bg-white rounded-lg shadow">
             <div class="flex">
                <div class="flex-1 py-5 pl-5 overflow-hidden">
                   <svg class="inline align-text-top" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -19,37 +19,26 @@
             <div class="px-5 pb-5">
                <div class="flex">
                 <div class="flex-grow pr-2">
-                    <%= f.input :email, label: "Email", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
+                    <%= f.input :email, label: "Email", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
                 </div>
                </div>
               <div class="flex">
                 <div class="flex-grow pr-2">
-                    <%= f.input :fname, label: "First Name", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
+                    <%= f.input :fname, label: "First Name", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
                 </div>
                   <div class="flex-grow pr-2">
-                      <%= f.input :lname, label: "Last Name", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
+                      <%= f.input :lname, label: "Last Name", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
                   </div>
                   <div class="flex-grow">
                       <label
                      for="formFile"
-                     class="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
+                     class="mb-2 inline-block text-neutral-700"
                      >Default file input example</label
                    >
-                     <%= f.file_field :avatar, class: "relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out file:-mx-3 file:-my-1.5 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-1.5 file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:bg-white focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none dark:bg-transparent dark:text-neutral-200 dark:focus:bg-transparent" %>
+                     <%= f.file_field :avatar, class: "relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out file:-mx-3 file:-my-1.5 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-1.5 file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:bg-white focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none " %>
                   
                   </div>
                </div>
-               <div class="flex">
-                <div class="flex-grow pr-2">
-                    <%= f.input :height, label: "Height", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400", placeholder: 'Inches'} %>
-                </div>
-                <div class="flex-grow pr-2">
-                    <%= f.input :weight, label: "Weight", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400", placeholder: "Pounds (lb)"} %>
-                  </div>
-                  <div class="flex-grow">
-                    <%= f.input :level, label: "Level", collection: ["Beginner", "Intermediate", "Advanced"], input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400", placeholder: "Pounds (lb)"} %>
-                  </div>
-                </div>
                 <div class="flex">
                    <div class="flex-grow pr-2">
                        <%= f.input :password, label: "Password", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
@@ -57,10 +46,10 @@
                </div>
                <div class="flex">
                    <div class="flex-grow pr-2">
-                       <%= f.input :password_confirmation, label: "Password Confirm", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
+                       <%= f.input :password_confirmation, label: "Password Confirm", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400"} %>
                    </div>
                </div>
-                <%= f.input :goal, label: "Goal", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400", placeholder: 'Ex. Lose Weight, Gain Muscle'} %>
+                <%= f.input :goal, label: "Goal", input_html: {class: "text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base   transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200  focus:border-blueGray-500 focus:bg-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400", placeholder: 'Ex. Lose Weight, Gain Muscle'} %>
             </div>
             <hr class="mt-4">
             <div class="flex flex-row-reverse p-3">

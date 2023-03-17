@@ -10,15 +10,18 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       # user identity
       t.string :fname
       t.string :lname
+      t.string :gender
       t.integer :height
       t.integer :weight
       t.string :level
       t.string :goal
       t.string :city, limit: 88
       t.string :state, limit: 2
+      t.integer :zipcode
 
       t.decimal :rating, :precision => 15, :scale => 2
 
+      t.text :biline
 
 
       ## Recoverable
@@ -32,10 +35,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
 
       ## Trackable
       t.integer  :sign_in_count, default: 0, null: false
-      # t.datetime :current_sign_in_at
-      # t.datetime :last_sign_in_at
-      # t.string   :current_sign_in_ip
-      # t.string   :last_sign_in_ip
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
 
       ## Confirmable
       t.string   :confirmation_token

@@ -9,6 +9,6 @@ class UserRequestTrainor < ActiveRecord::Migration[7.0]
 
     add_foreign_key :user_trainors, :users, column: :user_id
     add_foreign_key :user_trainors , :users, column: :trainor_id
-    drop_table :personal_trainor_users
+    # drop_table :personal_trainor_users
   end
 end

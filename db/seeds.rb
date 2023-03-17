@@ -9,13 +9,14 @@
 
 
 if Rails.env == "development"
+	pronous = ['Woman', 'Man', 'Transgender', 'Non-binary/non-conforming', 'Prefer not to respond']
 	weights = (75..300).to_a
 	heights = (48..84).to_a
 	ratings = 0.1.step(by: 0.1, to: 5).to_a
 	levels = ["Beginner", "Intermediate", "Advanced"]
 	states = CS.states(:us)
 	fake_users = [
-		{:fname => "Michael", :lname => "Aronian", :is_user => true,  weight: 175, :height => 69, email: "aronian.m@gmail.com", :level => "Advanced", :goal => "Be better", :city => "Chelmsford", state: 'MA'},
+		{:fname => "Michael", :lname => "Aronian", :gender => "Man", :is_user => true,  weight: 175, :height => 69, email: "aronian.m@gmail.com", :level => "Advanced", :goal => "Be better", :city => "Chelmsford", state: 'MA'},
 	]
 
 	fake_users.each.with_index do |u,i |
@@ -29,29 +30,33 @@ if Rails.env == "development"
 		end
 	end
 
-	400.times do
+	50.times do
 		state = states.keys.sample
 		city = CS.cities(state, :us)
 		fname = Faker::Name.first_name
 		lname = Faker::Name.last_name
-		u = {fname: fname, lname: lname, :is_trainor => true, weight: weights.sample, height: heights.sample, email: "#{fname}.#{lname}@gmail.com", level: levels.sample, goal: Faker::Quote.jack_handey, city: city.sample, state: state, rating: ratings.sample.round(1)}
+		u = {fname: fname, lname: lname, :is_trainor => true, gender: pronous.sample, weight: weights.sample, height: heights.sample, email: "#{fname}.#{lname}@gmail.com", level: levels.sample, goal: Faker::Quote.jack_handey, city: city.sample, state: state, rating: ratings.sample.round(1)}
 		u[:password] = 'secret'
+		
 		already_existed = User.find_by(email: u[:email])
 		unless already_existed
 			user = User.create(u)
+			user.add_role('user')
 		end
 	end
 
-	400.times do 
+	50.times do 
 		state = states.keys.sample
 		city = CS.cities(state, :us)
 		fname = Faker::Name.first_name
 		lname = Faker::Name.last_name
-		u = {fname: fname, lname: lname, weight: weights.sample, :is_user => true, height: heights.sample, email: "#{fname}.#{lname}@gmail.com", level: levels.sample, goal: Faker::Quote.jack_handey, city: city.sample, state: state, rating: ratings.sample.round(1)}
+		u = {fname: fname, lname: lname, weight: weights.sample, :is_user => true, gender: pronous.sample, height: heights.sample, email: "#{fname}.#{lname}@gmail.com", level: levels.sample, goal: Faker::Quote.jack_handey, city: city.sample, state: state, rating: ratings.sample.round(1)}
 		u[:password] = 'secret'
 		already_existed = User.find_by(email: u[:email])
 		unless already_existed
+			
 			user = User.create(u)
+			user.add_role('user')
 		end
 	end
 	print("Completed")

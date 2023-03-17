@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   def pre_accept
       @user = User.find(params[:id])
   end
+
   def accept
       user = User.find(params[:id])
       acceptance = UserTrainor.find_by(:user_id => user.id, trainor_id: current_user.id)
@@ -33,5 +34,27 @@ class UsersController < ApplicationController
         @data[:redirect_to] = nil
         @data[:message] = "You have declined user"
       end
+  end
+
+  def request_chat
+    @trainor = User.find(params[:user_id])
+    @request = RequestChat.find_by(:user_id => current_user.id, :trainor_id => @trainor.id)
+    if @request
+      @message = "Already requested a message with #{@trainor.name}"
+    else
+      @save = true
+       @message = "Request for chat started with #{@trainor.name}"
+      RequestChat.create(:user_id => current_user.id, trainor_id: @trainor.id, accepted: false)
+    end
+    
+  end
+
+  def profile
+    @user = User.find(params[:id])
+    respond_to do |format|
+      format.html{
+        render layout: false
+      }
+    end
   end
 end

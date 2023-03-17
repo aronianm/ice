@@ -2,6 +2,7 @@ class UsersTrainorController < ApplicationController
 	before_action :set_user_trainor_connection, except: [:index]
 	def index
 		@requested_users = UserTrainor.includes(:trainor, :user).where(:trainor_id => current_user, accepted: nil)
+		@requested_messages =  RequestChat.where(:trainor_id => current_user.id, accepted: false)
 	end
 
 	def show

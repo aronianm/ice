@@ -1,6 +1,6 @@
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div data-controller='user' class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 bg-gray-700 text-gray-400">
+        <thead class="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Name
@@ -26,7 +26,7 @@
                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap text-white">
                     <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/<%= ['men', 'women'].sample %>/<%= (0..98).to_a.sample %>.jpg" alt="Jese image">
                     <div class="pl-3">
-                        <div class="text-base font-semibold"><%= trainor.name %></div>
+                        <div class="text-base text-white font-semibold"><%= trainor.name %></div>
                     </div>  
                 </th>
                 <td class="px-6 py-4">
@@ -46,22 +46,8 @@
                         <% end %>
                     </div>
                 </td>
-                <td class="px-6 py-4">
-                    <% if @rooms.include?(trainor.id) %>
-                        <%= link_to trainor_connect_user_rooms_path(trainor), class: "font-medium  bg-blue-600 text-blue-600 text-blue-500 hover:underline" do %>
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="n#547ca3" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                            </svg>
-                        <% end %>
-                    <% else %>
-                        <%= link_to new_user_room_path(trainor), class: "font-medium text-blue-600 text-blue-500 hover:underline" do %>
-                        
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
-                            </svg>
-                        <% end %>
-                    <% end %>
+                <td class="px-6 py-4" role='button' data-action='click->user#renderRequest' data-url="<%= profile_user_path(trainor) %>">
+                    <%= render :template => "icons/profile" %>
                 </td>
             </tr>
             <% end %>

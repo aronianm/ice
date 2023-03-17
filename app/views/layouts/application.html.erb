@@ -27,20 +27,14 @@
   </head>
 
   <body style="background: #374151;">
-    <% unless current_user.nil?  %>
-    <% if notice %>
-      <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-        <span class="font-medium">Success alert!</span> <%= notice %> <span class='float-right' role='button' onclick="$(this).parent().remove()">x</span>
-    </div>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
+    
+      <%= render "layouts/messages" %>
       <%= render :partial => "layouts/navigation" %>
-      <div class="w-full">
-       <% end %>
+      <div class="w-full mt-10">
         <%= yield %>
       </div>
    
   </body>
+  <%= render :partial => 'layouts/footer' %>
+
 </html>

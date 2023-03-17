@@ -9,7 +9,10 @@ class ApplicationController < ActionController::Base
     before_action :global_variables
 
     def global_variables
-        @requests = current_user.trainor_requests.where(:accepted => nil).size
+        if current_user
+            @requests = current_user.trainor_requests.where(:accepted => nil).size
+            @message_requests = RequestChat.where(:trainor_id => current_user.id, accepted: false).size
+        end
     end
    	protected
     def configure_permitted_parameters
