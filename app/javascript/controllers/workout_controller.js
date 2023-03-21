@@ -31,6 +31,21 @@ export default class extends Controller {
   	})
   	
   }
+
+  addRow(event){
+  	var workoutRowHtml = $("#exerciseRow").html()
+  	$("#exerciseSection").append(workoutRowHtml)
+
+  }
+
+  showPounds(event){
+  	$(event.currentTarget.parentElement.parentElement).find('.weight-metric').slideToggle()
+  }
+
+  circleDay(event){
+  	$(".day-buttons").removeClass('circle')
+  	$(event.currentTarget).addClass('circle')
+  }
   
 }
 

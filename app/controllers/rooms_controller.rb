@@ -10,6 +10,13 @@ class RoomsController < ApplicationController
   end
 
   def index
+    if current_user.is_trainor
+      @requested = RequestChat.where(:trainor_id => current_user.id, accepted: nil)
+
+      @requested.each do |request|
+        @rooms.push(Room.new(:name => "Request from #{request.user.name}", user_id: request.user_id, trainor_id: current_user.id))
+      end
+    end
   end
 
   def show
@@ -41,6 +48,21 @@ class RoomsController < ApplicationController
     redirect_to rooms_path
   end
 
+  def accept_room_modal
+    @user = params[:user_id]
+  end
+
+  def accept_room
+    request = RequestChat.find_by(:trainor_id => current_user.id, accepted: nil, user_id: params[:user_id])
+    request.accepted = params[:accepted]
+    request.save
+    if request.accepted
+        uniq_key_time = DateTime.now.readable_inspect.gsub(" ", "_")
+        Room.create(:name => "#{current_user.id}_#{params[:user_id]}_#{uniq_key_time}", user_id: request.user_id, trainor_id: current_user.id)
+    end
+    render :json => {:ok => '200'}
+  end
+
   private
 
   def set_room
@@ -50,9 +72,11 @@ class RoomsController < ApplicationController
 
   def set_rooms
      if current_user.has_role?(:admin) 
-      @rooms = Room.where("trainor_id = #{current_user.id} or user_id = #{current_user.id}")
+      @rooms = Room.where("trainor_id = #{current_user.id} or user_id = #{current_user.id}").load.to_a
+    elsif current_user.is_user
+      @rooms = Room.where(:user_id => current_user.id).load.to_a
     else
-      @rooms = Room.where(:trainor_id => current_user.id)
+      @rooms = Room.where(:trainor_id => current_user.id).load.to_a
     end
   end
 end

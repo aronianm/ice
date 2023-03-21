@@ -1,6 +1,6 @@
-<div data-controller='user' class="relative overflow-x-auto shadow-md sm:rounded-lg mt-10">
+<div data-controller='user' class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-            <table class="w-full text-sm text-left text-gray-500 text-gray-400 mt-5">
+            <table class="w-full text-sm text-left text-gray-500 text-gray-400">
                 <thead class="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -15,9 +15,7 @@
                         <th scope="col" class="px-6 py-3 text-center">
                             Message
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Build
-                        </th>
+                        <th scope="col" class="px-6 py-3 text-center"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +32,7 @@
                             
                                 <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/<%= ['men', 'women'].sample %>/<%= (0..98).to_a.sample %>.jpg" alt="Jese image">
                                 <div class="pl-3">
-                                    <div class="text-base font-semibold"><%= trainor.user.name %></div>
+                                    <div class="text-base font-semibold text-white"><%= trainor.user.name %></div>
                                 </div>  
                             </div>
                         </th>
@@ -43,7 +41,7 @@
                                 <%= trainor.created_at.strftime("%m/%d/%Y") %>
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4 flex justify-center">
                             <% if trainor.accepted %>
                                 <%= render :template => "icons/checkmark" %>
                             <% elsif trainor.accepted.nil? %>
@@ -61,7 +59,19 @@
                        </div>
                         </td>
                         <td class="px-6 py-4 text-center">
-                            <button data-action='click -> user#preAcceptUser' data-url='<%= accept_user_user_path(trainor.user_id) %>' type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Accept User</button>
+                            <% if !trainor.accepted %>
+                                <button data-action='click -> user#preAcceptUser' data-url='<%= accept_user_user_path(trainor.user_id) %>' type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Accept User</button>
+                            <% else %>
+                                <%  if trainor.program.nil? %>
+                                    <%= link_to new_trainor_user_program_path(trainor.user_id), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" do %>
+                                    Build
+                                    <% end %>
+                                <% else %>
+                                    <%= link_to trainor_program_path(1), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" do %>
+                                        Build
+                                    <% end %>
+                                <% end %>
+                            <% end %>
                         </td>
                         
                     </tr>

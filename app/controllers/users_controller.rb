@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     else
       @save = true
        @message = "Request for chat started with #{@trainor.name}"
-      RequestChat.create(:user_id => current_user.id, trainor_id: @trainor.id, accepted: false)
+      RequestChat.create(:user_id => current_user.id, trainor_id: @trainor.id, accepted: nil)
     end
     
   end

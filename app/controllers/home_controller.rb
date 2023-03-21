@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 	def index
 		if current_user.is_user
 			if current_user.has_trainor?
+				
 			else
 				@no_trainor = true
 				@trainors = User.personal_trainors

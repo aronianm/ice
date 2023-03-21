@@ -1,0 +1,11 @@
+var html = "<%=j render :partial => 'accept_user_modal' %>"
+
+$('body').append(html)
+$('body').find("#acceptUserRoom").slideToggle()
+
+$("#acceptUserRoom").find('div:first').each(function(){
+	var leftSide = window.outerWidth/3
+	$(this).css('margin-left', leftSide)
+
+})
+

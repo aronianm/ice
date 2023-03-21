@@ -39,6 +39,15 @@ class ProgramsController < ApplicationController
 	end
 
 
+    def current_program
+    	connection = UserTrainor.find_by(:user_id => current_user.id)
+    	@trainor = connection.trainor
+    	@program = connection.program
+    	@room = Room.find_by(:user_id => current_user.id, :trainor_id => @trainor.id)
+	    
+    end
+
+
 
 	private
 	def program_params

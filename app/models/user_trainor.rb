@@ -9,4 +9,8 @@ class UserTrainor < ApplicationRecord
 	def pending?
 		self.accepted.nil?
 	end
+
+	def program
+		UserProgram.find_by(:user_id => self.user_id, :trainor_id => self.trainor_id)
+	end
 end

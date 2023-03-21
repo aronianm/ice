@@ -1,0 +1,8 @@
+<% if @trainor.blank? %>
+    <%= render :partial => "no_trainor" %>
+<% elsif @program.blank? %>
+    <%= render :partial => "program_building" %>
+<% else %> 
+    <%= render :partial => "program_kanboard" %>
+<% end %>
+    

@@ -1,23 +1,27 @@
-<div data-controller='user' class="relative overflow-x-auto shadow-md sm:rounded-lg container">
+<div data-controller='user' class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <div class="container mx-auto ">
         <div class="py-8">
             <div class=" sm:px-8 py-4 overflow-x-auto">
                 <table data-controller='datatable' class="w-full text-sm text-left text-gray-500 text-gray-400">
-                    <thead class="text-xs text-white uppercase bg-gray-50 bg-gray-700 text-gray-400">
+                            <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+            Find your trainor
+            <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Sort by Rating, Location or name</p>
+        </caption>
+                    <thead class="text-xs text-white uppercase bg-gray-50 bg-gray-700">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th role='button' scope="col" class="px-6 py-3">
                                 Name
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th role='button' scope="col" class="px-6 py-3">
                                 Rating
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                Status
+                             <th role='button' scope="col" class="px-6 py-3">
+                                City
                             </th>
-                             <th scope="col" class="px-6 py-3">
-                                Location
+                            <th role='button' scope="col" class="px-6 py-3">
+                                State
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th role='button' scope="col" class="px-6 py-3">
                                 Message
                             </th>
                         </tr>
@@ -26,21 +30,24 @@
                         <% @trainors.sort_by{|t| t.rating.nil? ? 0 : t.rating}.reverse.each do |trainor| %>
 
                         <tr class="border-b bg-gray-800  border-gray-700 hover:bg-gray-50 hover:bg-gray-600">
-                            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap text-white">
+                            <td style='display: inline-flex;' scope="row" class="items-center px-6 py-4 text-gray-900 whitespace-nowrap text-white">
                                 <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/<%= ['men', 'women'].sample %>/<%= (0..98).to_a.sample %>.jpg" alt="Jese image">
                                 <div class="pl-3">
                                     <div class="text-base text-white font-semibold"><%= trainor.name %></div>
                                 </div>  
-                            </th>
-                            <td data-sort='<%= trainor.rating %>' class="px-6 py-4">
+                            </td>
+                            <td  class="px-6 py-4">
                                 <div style="display: inline-flex;">
-                                    <%= trainor.formatted_ratings %>
-                                </div>
+                                <%= trainor.formatted_ratings %>
+                            </div>
                             </td>
                             <td class="px-6 py-4">
-                                <%= trainor.formatted_location %>
+                                <%= trainor.city %>
                             </td>
                             <td class="px-6 py-4">
+                                <%= trainor.state %>
+                            </td>
+                            <td class="px-6 py-4" role='button' data-action='click->user#renderRequest' data-url="<%= profile_user_path(trainor) %>">
                                 <div class="flex items-center">
                                     <% if trainor.online?  %>
                                     <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Online
@@ -48,8 +55,6 @@
                                     <div class="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Offline
                                     <% end %>
                                 </div>
-                            </td>
-                            <td class="px-6 py-4" role='button' data-action='click->user#renderRequest' data-url="<%= profile_user_path(trainor) %>">
                                 <%= render :template => "icons/profile" %>
                             </td>
                         </tr>

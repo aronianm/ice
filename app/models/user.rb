@@ -36,6 +36,7 @@ class User < ApplicationRecord
 
   def add_created_role
     self.add_role(:user) if self.roles.blank?
+    self.is_user = true
   end
 
   def online?

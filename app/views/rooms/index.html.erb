@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col flex-auto  ">
+      <div class="flex flex-col flex-auto  bg-gray-700  ">
       
         <% if @user_connection.nil? && !@talking_to.nil?%>
           <ul id='messageUtils' class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 border-gray-700 text-gray-400">
@@ -65,11 +65,13 @@
                   Remove Chat
                 <% end %>
               </li>
+              <% unless current_user.is_trainor %>
               <li id='requestTrainorButton' class="mr-2" data-controller='user'>
-              <button data-action="click -> user#request" data-url="<%= user_request_trainor_path(@talking_to)%>" class = "inline-block text-white p-4 rounded-t-lg hover:text-gray-600">
-                Request <%= @talking_to.fname %>'s Program
-              </button>
-            </li>
+                  <button data-action="click -> user#request" data-url="<%= user_request_trainor_path(@talking_to)%>" class = "inline-block text-white p-4 rounded-t-lg hover:text-gray-600">
+                    Request <%= @talking_to.fname %>'s Program
+                  </button>
+              </li>
+            <% end %>
          
          <% end %>
         </ul>
@@ -83,19 +85,18 @@
             <small>Extra Options</small>
           </svg>
           </button> -->
-          <div id='message-container' class="flex flex-col h-full overflow-x-auto mb-4" data-controller='messanger_board'>
+          <div id='message-container' class="flex flex-col h-full overflow-x-auto mb-10" data-controller='messanger_board'>
             <div class="flex flex-col h-full">
-              
-            
               <div id="messages">
                 <% @messages.each do |message | %>
                       <%= render message %>
                 <% end unless @messages.nil? %>
               </div>
             </div>
+            <%= render partial: 'messages/message_bar' %>
           </div>
 
-          <%= render partial: 'messages/message_bar' %>
+          
         </div>
       </div>
     </div>

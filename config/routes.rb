@@ -1,13 +1,22 @@
 Rails.application.routes.draw do
   root "home#index"
+  namespace :trainor do 
+     resources :home
+     resources :programs, only: [:show, :edit, :delete, :index] do 
+      member do
+        resources :workouts
+      end
+     end
+     resources :users, only: [:show] do
+      resources :programs, only: [:new, :create]
+    end
+  end
   resources :home, only: [:index] do
     collection do 
       get :privacy_policy
     end
   end
   devise_for :users
-
-  
   resources :rooms do
     resources :messages
   end
@@ -28,12 +37,19 @@ Rails.application.routes.draw do
     resources :rooms, only: [:new] do
       collection do 
         get :trainor_connect
+        get :accept_room_modal
+        post :accept_room
       end
     end
     resources :exercises do 
       resources :exercise_users
     end
     member do 
+      resources :programs, only: [:index] do
+        collection do 
+          get :current_program
+        end
+      end
       post :accept_user, action: :accept
       get :accept_user, action: :pre_accept
       get :profile

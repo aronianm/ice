@@ -72,6 +72,31 @@ export default class extends Controller {
      })
   }
 
+  acceptUserModal(event){
+    var url = event.currentTarget.dataset.url
+    $.ajax({
+      url: url,
+      beforeSend: function(xhr) {
+         xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      }
+     })
+  }
+
+
+  acceptRoom(event){
+    var url = event.currentTarget.dataset.url
+    $.ajax({
+      url: url,
+      method: 'POST',
+      beforeSend: function(xhr) {
+         xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      },
+      success: function(data){
+        window.location.href = '/rooms'
+      }
+     })
+  }
+
   acceptDeclineUser(event){
     var url = event.currentTarget.dataset.url
     $.ajax({
