@@ -24,28 +24,41 @@ export default class extends Controller {
   	var payload = {'name': "", 'exercises': []}
   	payload['name'] = $("#workout_name").val()
   	var day = $("#workout_date").val() || $(".circle").data('index')
-  	payload['day'] = day
+  	if(day !== undefined){
+  		payload['day'] = day
+  	}
+  	var startTime = $("#workout_start").val()
+  	var endTime = $("#workout_end").val()
+  	if(startTime != ''){
+  		payload['workoutStart'] = startTime
+  	}
+  	if( endTime != ''){
+  		payload['workoutEnd'] = endTime
+  	}
+  	
   	$("#exerciseSection").find(".exercise-row").each(function(){
   		var exercisePayload = {}
   		var exerciseID = $(this).find("#exercise").val()
-  		exercisePayload['exercise_id'] = exerciseID
-  		exercisePayload['exercise_sets'] = []
-  		$(this).find('.set').each(function(index) {
-  			var reps = $(this).find('.reps').val()
-  			var set = index + 1
-  			var weight = $(this).find('.weight').val()
-  			var time = $(this).find(".time").val()
-  			var config = {}
-  			if(reps.length > 0){
-	  			config['reps'] = reps
-	  			config['set'] = set
-	  			config['weight'] = weight
-	  			config['time'] = time
-	  			exercisePayload['exercise_sets'].push(config)
-	  		}
+  		if(exerciseID != "Selected Exercise"){
+	  		exercisePayload['exercise_id'] = exerciseID
+	  		exercisePayload['exercise_sets'] = []
+	  		$(this).find('.set').each(function(index) {
+	  			var reps = $(this).find('.reps').val()
+	  			var set = index + 1
+	  			var weight = $(this).find('.weight').val()
+	  			var time = $(this).find(".time").val()
+	  			var config = {}
+	  			if(reps.length > 0){
+		  			config['reps'] = reps
+		  			config['set'] = set
+		  			config['weight'] = weight
+		  			config['time'] = time
+		  			exercisePayload['exercise_sets'].push(config)
+		  		}
 
-  		})
-  		payload['exercises'].push(exercisePayload)
+	  		})
+	  		payload['exercises'].push(exercisePayload)
+	  	}
   	})
 
   	console.log(payload)
