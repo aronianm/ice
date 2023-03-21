@@ -3,9 +3,6 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import './add_jquery'
 import 'flowbite';
-import './route_helper';
-import "./workouts";
-import "./program";
 // Inbox script starts
 // Add DataTables jQuery plugin
 
