@@ -1,21 +1,22 @@
-<div class="flex">
+<div class="flex exercise-row">
 	<div class="w-1/4 p-5">
 		<span>Exercise</span>
-		<select class="text-center text-gray-900 border-1 rounded-lg border-blue-500 text-sm br-2 focus:border-none block w-full p-2.5">
+		<select id='exercise' class="text-center text-gray-900 border-1 rounded-lg border-blue-500 text-sm br-2 focus:border-none block w-full p-2.5">
 			<option>Selected Exercise</option>
 			<% Exercise.all.each do |workout| %>
-				<option><%= workout.name %></option>
+				<option value=<%= workout.id %>><%= workout.name %></option>
 			<% end %>
 		</select>
 	</div>
 	<% 6.times do |set| %>
-		<div class="w-1/6 p-5">
+		<div class="w-1/6 p-5 set">
 			<span>Set <%= set +1 %> 
-				<button  typ='button' class="float-right" data-action='click -> workout#showPounds' data-controller='workout'><i class="fa-solid fa-plus fa-beat"></i></button>
+				<button typ='button' class="float-right" data-action='click -> programCreator#showExtra' data-controller='programCreator'><i class="fa-solid fa-plus fa-beat"></i></button>
 			</span>
 
-			<input tabindex='<%= set %>' type="text" id="workout_start" class="text-center text-gray-900 border-1 rounded-lg border-blue-500 text-sm br-2 focus:border-none block w-full p-2.5" placeholder="Reps" required> 
-			<input type="" placeholder='Weight' class=" hidden weight-metric text-center text-gray-900 border-1 rounded-lg border-blue-500 text-sm mt-2 border p-2.5  block">
+			<input tabindex='<%= set %>' type="text" id="workout_start" class="reps text-center text-gray-900 border-1 rounded-lg border-blue-500 text-sm br-2 focus:border-none block w-full p-2.5" placeholder="Reps" required> 
+			<input type="" placeholder='Weight' class="weight hidden weight-metric text-center text-gray-900 border-1 rounded-lg border-blue-500 text-sm mt-2 border p-2.5  block">
+			<input type="number" placeholder='Time (seconds)' min='0' max='350' class="time hidden w-full weight-metric text-center text-gray-900 border-1 rounded-lg border-blue-500 text-sm mt-2 border p-2.5  block">
 		</div>
 	<% end %>
 </div>

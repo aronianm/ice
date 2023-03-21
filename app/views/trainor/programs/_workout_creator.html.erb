@@ -1,0 +1,55 @@
+
+<div id='exerciseRow' class="hidden">
+	<%= render :partial => "trainor/workouts/exercise_row" %>
+</div>
+
+<div class="flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr">
+	<div class="px-10 mt-6">
+		<button data-action='click -> programCreator#create' class="bg-green-600 text-white rounded-md p-3 float-right">Save <i class="fa-solid fa-floppy-disk"></i></button>
+		<h1 class="text-2xl font-bold"><%= @program.name %> Workouts Creator</h1>
+	</div>
+	<div class="workout-page px-10 mt-4 space-x-6 ">
+		<div class="flex justify-center w-full">
+			<div class="flex items-center">
+				<span class="mr-5">Date</span>
+				<input type="date" id="workout_date" class=" text-gray-900 border-b-1 border-t-0 border-l-0 border-r-0 border-blue-500 text-sm br-2 focus:border-none block w-full p-2.5" placeholder="" required> 
+				<% ['M', 'T', 'W', 'T', 'F', 'S', 'S'].each.with_index(1) do |day, i| %>
+					<button class="ml-5 p-3 day-buttons" data-index='<%= i %>' role='button' data-controller='workout' data-action="click -> workout#circleDay"><%= day %></button>
+				<% end %>
+			</div>
+		</div>
+		<div class="flex justify-center">
+			<div class="w-1/2 p-4">
+				<span>Workout</span>
+				<input type="text" id="workout_name" class=" text-gray-900 border-b-1 border-t-0 border-l-0 border-r-0 border-blue-500 text-sm br-2 focus:border-none block w-full p-2.5" placeholder="" required> 
+			</div>
+			<div class="w-1/4 p-4">
+				<span>Start</span>
+				<input type="time" id="workout_start" class="text-center text-gray-900 border-b-1 border-t-0 border-l-0 border-r-0 border-blue-500 text-sm br-2 focus:border-none block w-full p-2.5" placeholder="" required> 
+			</div>
+			<div class="w-1/4 p-4">
+				<span>End</span>
+				<input type="time" id="workout_start" class="text-center text-gray-900 border-b-1 border-t-0 border-l-0 border-r-0 border-blue-500 text-sm br-2 focus:border-none block w-full p-2.5" placeholder="" required> 
+			</div>
+		</div>
+		<div id='exerciseSection'>
+			<%= render :partial => "trainor/workouts/exercise_row" %>
+		</div>
+	</div>
+	<div data-controller='workout' data-dial-init class="fixed right-6 bottom-18 group">
+	    <div id="speed-dial-menu-default" class="flex flex-col items-center hidden mb-4 space-y-2">
+	        <button data-action='click -> workout#addRow' type="button" data-tooltip-target="tooltip-share" data-tooltip-placement="left" class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
+	            <%= render :template => "icons/machine" %>
+	            <span class="sr-only">Add</span>
+	        </button>
+	        <div id="tooltip-share" role="tooltip" class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+	            + Exercise
+	            <div class="tooltip-arrow" data-popper-arrow></div>
+	        </div>
+	    </div>
+	    <button type="button" data-dial-toggle="speed-dial-menu-default" aria-controls="speed-dial-menu-default" aria-expanded="false" class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
+	        <svg aria-hidden="true" class="w-8 h-8 transition-transform group-hover:rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+	        <span class="sr-only">Open actions menu</span>
+	    </button>
+	</div>
+</div>

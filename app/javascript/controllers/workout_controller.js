@@ -38,9 +38,6 @@ export default class extends Controller {
 
   }
 
-  showPounds(event){
-  	$(event.currentTarget.parentElement.parentElement).find('.weight-metric').slideToggle()
-  }
 
   circleDay(event){
   	$(".day-buttons").removeClass('circle')

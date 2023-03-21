@@ -12,6 +12,7 @@ import ProgramController from './program_controller'
 import ExerciseController from './exercise_controller'
 import WorkoutController from './workout_controller'
 import DataTableController from './datatable_controller'
+import programCreatorController from './program_creator_controller';
 
 application.register("hello", HelloController)
 application.register("messanger",  MessagerController)
@@ -21,3 +22,4 @@ application.register("program", ProgramController)
 application.register("exercise", ExerciseController)
 application.register("workout", WorkoutController)
 application.register('datatable', DataTableController)
+application.register("programCreator", programCreatorController)
