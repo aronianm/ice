@@ -13,10 +13,10 @@ class CreateMessages < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_foreign_key :messages, :rooms, column: :room_id
-    add_foreign_key :messages, :users, column: :user_id
-    add_foreign_key :rooms, :users, column: :user_id
-    add_foreign_key :rooms, :users, column: :trainor_id
+    add_foreign_key :messages, :rooms, column: :room_id, on_delete: :cascade
+    add_foreign_key :messages, :users, column: :user_id, on_delete: :cascade
+    add_foreign_key :rooms, :users, column: :user_id, on_delete: :cascade
+    add_foreign_key :rooms, :users, column: :trainor_id, on_delete: :cascade
 
     add_index :rooms, [ :user_id, :trainor_id ], unique: true
   end

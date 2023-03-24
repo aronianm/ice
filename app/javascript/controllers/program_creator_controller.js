@@ -1,7 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
 
-
+	connect(){
+		var tabs = $("#programWorkoutTabs").find('li > button')
+	
+		if(tabs[0].attributes.active !== true){
+			$(tabs[0]).click()
+			tabs[0].attributes.active = true
+		}
+	}
   show(event){
   	var target = document.getElementById(event.currentTarget.dataset.show)
   	if(target.attributes['active'] === undefined){
@@ -16,12 +23,30 @@ export default class extends Controller {
 	    $(".program-section").css('display', '')
 	    $(target).attr('active', true)
 	    $(target).slideToggle()
-	}
+		}
+  }
+
+  workoutShow(event){
+  	var url = event.currentTarget.dataset.url
+  	$(".program-section").css("display", "")
+  	$(".program-section").addClass('hidden')
+  	$(".program-section").attr('active', false)
+
+  	$.ajax({
+  		url: url,
+  		method: 'GET',
+  		success: function(data){
+  			$("#workoutTarget").html(data)
+  			$("#workoutTarget").attr('active', true)
+  			$("#workoutTarget").slideToggle()
+  		}
+  	})
   }
 
   create(event){
 
   	var payload = {'name': "", 'exercises': []}
+  	var url = event.currentTarget.dataset.url
   	payload['name'] = $("#workout_name").val()
   	var day = $("#workout_date").val() || $(".circle").data('index')
   	if(day !== undefined){
@@ -50,9 +75,9 @@ export default class extends Controller {
 	  			var config = {}
 	  			if(reps.length > 0){
 		  			config['reps'] = reps
-		  			config['set'] = set
+		  			config['sets'] = set
 		  			config['weight'] = weight
-		  			config['time'] = time
+		  			config['duration'] = time
 		  			exercisePayload['exercise_sets'].push(config)
 		  		}
 
@@ -61,7 +86,14 @@ export default class extends Controller {
 	  	}
   	})
 
-  	console.log(payload)
+  	$.ajax({
+  		url: url,
+  		data: {'program_workouts': payload},
+  		method: 'POST',
+  		beforeSend: function(xhr) {
+         xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+      }
+  	})
   	
   }
 

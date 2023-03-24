@@ -13,6 +13,7 @@ import ExerciseController from './exercise_controller'
 import WorkoutController from './workout_controller'
 import DataTableController from './datatable_controller'
 import programCreatorController from './program_creator_controller';
+import formController from './form_controller';
 
 application.register("hello", HelloController)
 application.register("messanger",  MessagerController)

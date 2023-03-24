@@ -77,6 +77,10 @@ body {
     border-left: 4px solid #19c89a;
     border-radius: 4px;
 }
+
+#exerciseSection > .exercise-row:last {
+    margin-bottom: 200px;
+}
 .border-custom-green-light {
     border-left: 12px solid #b8c819;
     border-radius: 4px;

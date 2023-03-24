@@ -14,7 +14,7 @@ class CreateWorkoutTable < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_foreign_key :exercise_workouts, :workouts, column: :workout_id
-    add_foreign_key :exercise_workouts, :exercises, column: :exercise_id
+    add_foreign_key :exercise_workouts, :workouts, column: :workout_id, on_delete: :cascade
+    add_foreign_key :exercise_workouts, :exercises, column: :exercise_id, on_delete: :cascade
   end
 end

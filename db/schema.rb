@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_20_010508) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_191331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_010508) do
     t.integer "reps"
     t.integer "duration"
     t.text "notes"
+    t.integer "weight"
   end
 
   create_table "exercise_workouts", force: :cascade do |t|
@@ -62,7 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_010508) do
   create_table "exercises", force: :cascade do |t|
     t.string "name", null: false
     t.integer "target_muscle_id", null: false
-    t.integer "target_sub_muscle_id"
     t.text "definition"
     t.integer "created_by", null: false
     t.integer "updated_by", null: false
@@ -205,27 +205,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_20_010508) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "exercise_users", "exercises"
-  add_foreign_key "exercise_users", "programs"
-  add_foreign_key "exercise_users", "users"
-  add_foreign_key "exercise_workouts", "exercises"
-  add_foreign_key "exercise_workouts", "workouts"
-  add_foreign_key "exercises", "muscles", column: "target_muscle_id"
-  add_foreign_key "exercises", "muscles", column: "target_sub_muscle_id"
-  add_foreign_key "exercises", "users", column: "created_by"
-  add_foreign_key "exercises", "users", column: "updated_by"
-  add_foreign_key "messages", "rooms"
-  add_foreign_key "messages", "users"
-  add_foreign_key "muscles", "users", column: "created_by"
-  add_foreign_key "muscles", "users", column: "updated_by"
-  add_foreign_key "program_exercises", "exercises"
-  add_foreign_key "program_exercises", "programs"
-  add_foreign_key "rooms", "users"
-  add_foreign_key "rooms", "users", column: "trainor_id"
-  add_foreign_key "user_programs", "programs"
-  add_foreign_key "user_programs", "users"
+  add_foreign_key "exercise_users", "exercises", on_delete: :cascade
+  add_foreign_key "exercise_users", "programs", on_delete: :cascade
+  add_foreign_key "exercise_users", "users", on_delete: :cascade
+  add_foreign_key "exercise_workouts", "exercises", on_delete: :cascade
+  add_foreign_key "exercise_workouts", "workouts", on_delete: :cascade
+  add_foreign_key "exercises", "muscles", column: "target_muscle_id", on_delete: :cascade
+  add_foreign_key "exercises", "users", column: "created_by", on_delete: :cascade
+  add_foreign_key "exercises", "users", column: "updated_by", on_delete: :cascade
+  add_foreign_key "messages", "rooms", on_delete: :cascade
+  add_foreign_key "messages", "users", on_delete: :cascade
+  add_foreign_key "muscles", "users", column: "created_by", on_delete: :cascade
+  add_foreign_key "muscles", "users", column: "updated_by", on_delete: :cascade
+  add_foreign_key "program_exercises", "exercises", on_delete: :cascade
+  add_foreign_key "program_exercises", "programs", on_delete: :cascade
+  add_foreign_key "rooms", "users", column: "trainor_id", on_delete: :cascade
+  add_foreign_key "rooms", "users", on_delete: :cascade
+  add_foreign_key "user_programs", "programs", on_delete: :cascade
+  add_foreign_key "user_programs", "users", on_delete: :cascade
   add_foreign_key "user_trainors", "users"
   add_foreign_key "user_trainors", "users", column: "trainor_id"
-  add_foreign_key "users_roles", "roles"
-  add_foreign_key "users_roles", "users"
+  add_foreign_key "users_roles", "roles", on_delete: :cascade
+  add_foreign_key "users_roles", "users", on_delete: :cascade
 end

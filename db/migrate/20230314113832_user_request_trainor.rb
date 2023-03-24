@@ -7,8 +7,8 @@ class UserRequestTrainor < ActiveRecord::Migration[7.0]
       t.timestamps
     end
 
-    add_foreign_key :user_trainors, :users, column: :user_id
-    add_foreign_key :user_trainors , :users, column: :trainor_id
+    add_foreign_key :user_trainors, :users, column: :user_id, on_delete: :cascade
+    add_foreign_key :user_trainors , :users, column: :trainor_id, on_delete: :cascade
     # drop_table :personal_trainor_users
   end
 end

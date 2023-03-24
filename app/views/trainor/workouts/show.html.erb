@@ -1,0 +1,26 @@
+<div class="flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr">
+	<div class="px-10 mt-6">
+		<h1 class="text-2xl font-bold"><%= @workout.name %> Workout</h1>
+	</div>
+	<div class="px-10">
+		<div class="relative overflow-x-auto">
+		    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+		        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+		            <tr>
+		                <th scope="col" class="px-6 py-3">
+		                    Exercise
+		                </th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        	<% @exercises.each do |exercise| %>
+		            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+		                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+		                    <%= exercise.name %>
+		                </th>
+		            </tr>
+		            <% end %>
+		        </tbody>
+		</table>
+	</div>
+</div>

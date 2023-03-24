@@ -28,15 +28,15 @@ class CreateProgramTables < ActiveRecord::Migration[7.0]
       t.text :notes
     end
 
-    add_foreign_key :program_exercises, :programs, column: :program_id
-    add_foreign_key :program_exercises, :exercises, column: :exercise_id
+    add_foreign_key :program_exercises, :programs, column: :program_id, on_delete: :cascade
+    add_foreign_key :program_exercises, :exercises, column: :exercise_id, on_delete: :cascade
 
-    add_foreign_key :user_programs, :programs, column: :program_id
-    add_foreign_key :user_programs, :users, column: :user_id
+    add_foreign_key :user_programs, :programs, column: :program_id, on_delete: :cascade
+    add_foreign_key :user_programs, :users, column: :user_id, on_delete: :cascade
 
-    add_foreign_key :exercise_users, :programs, column: :program_id
-    add_foreign_key :exercise_users, :users, column: :user_id
-    add_foreign_key :exercise_users, :exercises, column: :exercise_id
+    add_foreign_key :exercise_users, :programs, column: :program_id, on_delete: :cascade
+    add_foreign_key :exercise_users, :users, column: :user_id, on_delete: :cascade
+    add_foreign_key :exercise_users, :exercises, column: :exercise_id, on_delete: :cascade
     # program can have many users
     # program can have many exercises
   end

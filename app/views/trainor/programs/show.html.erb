@@ -1,35 +1,29 @@
 <div data-controller='programCreator'>
 	<ul
+	  id='programWorkoutTabs'
 	  class=" flex list-none flex-col flex-wrap border-b-0 pl-0 md:flex-row"
 	  role="tablist"
 	  data-te-nav-ref>
-	  <li role="presentation">
-	    <button
-	      data-action='click -> programCreator#show'
-	      data-show="home"
-	      class="my-2 block border-x-0 border-t-0 border-b-2 border-transparent px-7 pt-4 pb-3.5 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate focus:border-transparent data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
-	      >Home
-
-	    </button>
-	  </li>
+	  <% @workouts.each do |workout | %>
+		  <li role="presentation">
+		    <button
+		      data-url="<%= show_trainor_workouts_path(@program.id, workout.id)%>"
+		      data-action='click -> programCreator#workoutShow'
+		      class="focus:border-transparen my-2 block border-x-0 border-t-0 border-b-2 border-transparent px-7 pt-4 pb-3.5 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
+		      ><%= workout.name %></button>
+		  </li>
+	  <% end %>
 	  <li role="presentation">
 	    <button
 	      data-action='click -> programCreator#show'
 	      data-show="workoutCreator"
 	      class="focus:border-transparen my-2 block border-x-0 border-t-0 border-b-2 border-transparent px-7 pt-4 pb-3.5 text-xs font-medium uppercase leading-tight text-neutral-500 hover:isolate hover:border-transparent hover:bg-neutral-100 focus:isolate data-[te-nav-active]:border-primary data-[te-nav-active]:text-primary dark:text-neutral-400 dark:hover:bg-transparent dark:data-[te-nav-active]:border-primary-400 dark:data-[te-nav-active]:text-primary-400"
 	      >Create Workout</button>
-	    
 	  </li>
 	</ul>
-	<div id='home' class='program-section'>
-
-		<div class="flex flex-col w-screen h-screen overflow-auto text-gray-700 bg-gradient-to-tr">
-			<div class="px-10 mt-6">
-				<h1 class="text-2xl font-bold"><%= @program.name %> Workouts</h1>
-			</div>
-		</div>
-	</div>
 	<div id='workoutCreator' class="program-section hidden">
 		<%= render :partial => "workout_creator" %>
+	</div>
+	<div id='workoutTarget' class="program-section">
 	</div>
 </div>

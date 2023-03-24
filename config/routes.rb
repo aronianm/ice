@@ -4,7 +4,13 @@ Rails.application.routes.draw do
      resources :home
      resources :programs, only: [:show, :edit, :delete, :index] do 
       member do
-        resources :workouts
+        resources :workouts, only: [:new, :create] do
+          collection do 
+            patch '/update/:workout_id', as: :update, action: :update
+            get '/update/:workout_id', as: :edit, action: :edit
+            get '/:workout_id', as: :show, action: :show
+          end
+        end
       end
      end
      resources :users, only: [:show] do
